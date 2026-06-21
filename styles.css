@@ -581,7 +581,32 @@ address {
 
 /* --- Projects Bento Grid --- */
 .projects {
-    background-color: var(--color-bg);
+    position: relative;
+    isolation: isolate;
+    background-color: var(--color-green-light);
+}
+
+.projects::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(
+            165deg,
+            rgba(253, 252, 251, 0.94) 0%,
+            rgba(232, 245, 239, 0.9) 45%,
+            rgba(232, 242, 250, 0.9) 100%
+        ),
+        url("./assets/mixed/bachpanshala.jpg");
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+}
+
+.projects .container {
+    position: relative;
+    z-index: 1;
 }
 
 .projects__grid {
