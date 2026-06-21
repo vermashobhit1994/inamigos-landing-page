@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="./donation-calculator.css" />
+    </head>
+    <body>
+        <div class="donation-card">
+            <div class="tabs">
+                <button class="tab active" onclick="setType('monthly')">
+                    MONTHLY 💧
+                </button>
+
+                <button class="tab" onclick="setType('once')">GIVE ONCE</button>
+            </div>
+
+            <h3>Choose an amount</h3>
+
+            <div class="amount-grid">
+                <button onclick="selectAmount(10)">$10</button>
+                <button onclick="selectAmount(20)">$20</button>
+                <button onclick="selectAmount(40)">$40</button>
+                <button onclick="selectAmount(100)">$100</button>
+            </div>
+
+            <input
+                type="number"
+                id="customAmount"
+                placeholder="Other amount"
+                oninput="customDonation()"
+            />
+
+            <div class="impact">
+                ❤️ Gives <span id="peopleCount">12</span> people clean water
+                every year.
+            </div>
+
+            <div class="summary">
+                Donation:
+                <strong>$<span id="amountDisplay">40</span></strong>
+                <span id="donationType">/month</span>
+            </div>
+
+            <button class="donate-btn">JOIN TODAY</button>
+        </div>
+    </body>
+</html>

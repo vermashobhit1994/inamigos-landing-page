@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="A closer look at an InAmigos project — its story, impact, and how you can help."
+        />
+        <title>Project — InAmigos Foundation</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+
+        <header class="site-header">
+            <nav class="nav container" aria-label="Primary navigation">
+                <a
+                    class="nav__logo"
+                    href="index.html"
+                    aria-label="InAmigos — Home"
+                >
+                    <span class="nav__logo-mark" aria-hidden="true"></span>
+                    <img
+                        src="./assets/logo/logo-light.png"
+                        alt="InAmigos Foundation logo"
+                        class="logo"
+                    />
+                </a>
+
+                <div class="nav__right">
+                    <ul class="nav__links">
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#events">Events</a></li>
+                        <li><a href="index.html#events">Initiatives</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="index.html#awards">Awards</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#blog">Blog</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="index.html#mission">Mission</a></li>
+                    </ul>
+                    <a
+                        href="index.html#get-involved"
+                        class="btn btn--pill btn--red"
+                        >Donate</a
+                    >
+                </div>
+
+                <button
+                    class="nav__menu-btn"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    type="button"
+                >
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+
+            <!-- Mobile dropdown menu -->
+            <div class="mobile-menu" id="mobile-menu" hidden>
+                <ul class="mobile-menu__links">
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="index.html#events">Events &amp; Initiatives</a>
+                    </li>
+                    <li><a href="index.html#team">Our Team</a></li>
+                    <li>
+                        <a href="index.html#awards"
+                            >Awards &amp; Achievements</a
+                        >
+                    </li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#blog">Blog</a></li>
+                    <li><a href="index.html#contact">Contact Us</a></li>
+                    <li><a href="index.html#mission">Mission</a></li>
+                </ul>
+                <a
+                    href="index.html#get-involved"
+                    class="btn btn--pill btn--red btn--block"
+                    >Donate</a
+                >
+            </div>
+        </header>
+
+        <main id="main-content">
+            <!--
+                The content below is generated automatically from the project
+                you click on. To edit any project's content, open
+                "projects-data.js" — you never need to touch this file.
+            -->
+            <div id="project-detail"></div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer__inner">
+                <div class="footer__brand">
+                    <a
+                        class="nav__logo"
+                        href="index.html"
+                        aria-label="InAmigos — Home"
+                    >
+                        <img
+                            src="./assets/logo/logo-dark.jpg"
+                            alt="InAmigos Foundation logo"
+                            class="logo logo--footer"
+                        />
+                    </a>
+                    <p>
+                        Registered under Section 8 of the Companies Act.
+                        Tax-exempt donations (80G eligible).
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#projects">Our Work</a></li>
+                        <li><a href="index.html#impact">Impact</a></li>
+                        <li>
+                            <a href="index.html#get-involved">Donate</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__contact">
+                    <h3>Contact</h3>
+                    <address>
+                        <p>14 Community Lane, Bandra West, Mumbai 400050</p>
+                        <p>
+                            <a href="mailto:hello@InAmigos.org"
+                                >hello@InAmigos.org</a
+                            >
+                        </p>
+                        <p><a href="tel:+912212345678">+91 22 1234 5678</a></p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer__bottom container">
+                <p>&copy; 2026 InAmigos Foundation. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script src="./projects-data.js"></script>
+        <script src="./scripts.js"></script>
+        <script src="./project-page.js"></script>
+    </body>
+</html>

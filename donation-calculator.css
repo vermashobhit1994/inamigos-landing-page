@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.donation-card {
+    width: 420px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+    display: flex;
+}
+
+.tab {
+    flex: 1;
+    padding: 18px;
+    border: none;
+    cursor: pointer;
+    background: #eee;
+    font-weight: bold;
+}
+
+.tab.active {
+    background: #ffc107;
+    color: #000;
+}
+
+h3 {
+    padding: 20px;
+    margin: 0;
+    color: #0f4c81;
+}
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0 20px;
+}
+
+.amount-grid button {
+    padding: 18px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.amount-grid button:hover {
+    background: #ffc107;
+}
+
+#customAmount {
+    width: calc(100% - 40px);
+    margin: 15px 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.impact {
+    padding: 10px 20px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.summary {
+    padding: 15px 20px;
+    color: #333;
+    font-size: 18px;
+}
+
+.donate-btn {
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 18px;
+    border: none;
+    border-radius: 8px;
+    background: #ffc107;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.donate-btn:hover {
+    transform: translateY(-2px);
+}

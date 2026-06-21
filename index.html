@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="InAmigos — spreading awareness about our community projects and creating lasting social impact. Donate, volunteer, or join us today."
+        />
+        <title>InAmigos Foundation</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+
+        <header class="site-header">
+            <nav class="nav container" aria-label="Primary navigation">
+                <a class="nav__logo" href="/" aria-label="InAmigos — Home">
+                    <span class="nav__logo-mark" aria-hidden="true"></span>
+                    <img
+                        src="./assets/logo/logo-light.png"
+                        alt="InAmigos Foundation logo"
+                        class="logo"
+                    />
+                </a>
+
+                <div class="nav__right">
+                    <ul class="nav__links">
+                        <li><a href="#projects">Projects</a></li>
+                        <li>
+                            <a href="#events">Events </a>
+                        </li>
+                        <li>
+                            <a href="#events">Initiatives </a>
+                        </li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#awards">Awards</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#mission">Mission</a></li>
+                    </ul>
+                    <a href="#get-involved" class="btn btn--pill btn--red"
+                        >Donate</a
+                    >
+                </div>
+
+                <button
+                    class="nav__menu-btn"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    type="button"
+                >
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+
+            <!-- Mobile dropdown menu -->
+            <div class="mobile-menu" id="mobile-menu" hidden>
+                <ul class="mobile-menu__links">
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#events">Events &amp; Initiatives</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#awards">Awards &amp; Achievements</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#mission">Mission</a></li>
+                </ul>
+                <a
+                    href="#get-involved"
+                    class="btn btn--pill btn--red btn--block"
+                    >Donate</a
+                >
+            </div>
+        </header>
+
+        <main id="main-content">
+            <!-- Hero — full banner image (hero.png is a composite; don't crop in a side column) -->
+            <section class="hero" aria-labelledby="hero-heading">
+                <div class="container hero__inner">
+                    <h1 id="hero-heading" class="visually-hidden">
+                        Small acts. Big change. Together, we build a world where
+                        every child, every life, and every tree has a chance to
+                        thrive.
+                    </h1>
+                    <div class="hero__banner">
+                        <img
+                            src="./assets/hero.png"
+                            alt="InAmigos campaign banner: Small acts, big change — lives touched, villages reached, and trees planted across our programmes."
+                            class="hero__banner-img"
+                            loading="eager"
+                        />
+                    </div>
+                    <div class="hero__actions">
+                        <a
+                            href="#get-involved"
+                            class="btn btn--pill btn--red"
+                        >
+                            Donate Now
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M3 8h10M9 4l4 4-4 4"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </a>
+                        <a href="#projects" class="link-arrow"
+                            >Explore Our Work</a
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section
+                id="about"
+                class="section about"
+                aria-labelledby="about-heading"
+            >
+                <div class="container about__inner">
+                    <header class="section__header">
+                        <p class="eyebrow">Who We Are</p>
+                        <h2 id="about-heading">
+                            Rooted in compassion, growing through action
+                        </h2>
+                        <p class="section__intro">
+                            Since 2010, InAmigos has partnered with local
+                            communities to address the root causes of poverty.
+                            We believe transparency, dignity, and collaboration
+                            are the foundation of meaningful change.
+                        </p>
+                    </header>
+                    <div class="about__values">
+                        <article class="value-card value-card--green">
+                            <span class="value-card__num">01</span>
+                            <h3>Mission</h3>
+                            <p>
+                                Build sustainable, community-led solutions for
+                                education, health, and livelihood.
+                            </p>
+                        </article>
+                        <article class="value-card value-card--blue">
+                            <span class="value-card__num">02</span>
+                            <h3>Vision</h3>
+                            <p>
+                                A world where every person has access to
+                                opportunity, care, and hope.
+                            </p>
+                        </article>
+                        <article class="value-card value-card--green">
+                            <span class="value-card__num">03</span>
+                            <h3>Values</h3>
+                            <p>
+                                98% of funds go directly to programs — we report
+                                openly on every rupee spent.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ongoing Projects (rendered from the list in scripts.js) -->
+            <section
+                id="projects"
+                class="section projects"
+                aria-labelledby="projects-heading"
+            >
+                <div class="container">
+                    <header class="section__header section__header--center">
+                        <p class="eyebrow">What We Do</p>
+                        <h2 id="projects-heading">
+                            Our focus areas &amp; ongoing projects
+                        </h2>
+                        <p class="section__intro">
+                            Each initiative is designed with local communities
+                            at the center — addressing real needs with
+                            measurable, lasting outcomes.
+                        </p>
+                    </header>
+
+                    <!--
+                        To add a project: open projects-data.js and add an
+                        entry to PROJECTS. Cards below are generated for you.
+                    -->
+                    <div
+                        class="projects__grid"
+                        id="projects-grid"
+                        role="list"
+                    ></div>
+                </div>
+            </section>
+
+            <!-- Impact Journey -->
+            <section class="section journey" aria-labelledby="journey-heading">
+                <div class="container">
+                    <header class="section__header section__header--center">
+                        <p class="eyebrow">How It Works</p>
+                        <h2 id="journey-heading">Your impact journey</h2>
+                    </header>
+
+                    <div class="journey__steps">
+                        <article class="journey__step journey__step--green">
+                            <span class="journey__num">01</span>
+                            <div class="journey__icon" aria-hidden="true">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                    />
+                                </svg>
+                            </div>
+                            <h3>You Donate</h3>
+                            <p>
+                                Your contribution fuels real programs on the
+                                ground.
+                            </p>
+                        </article>
+
+                        <article class="journey__step journey__step--blue">
+                            <div class="journey__icon" aria-hidden="true">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+                            </div>
+                            <h3>We Act</h3>
+                            <p>
+                                Our teams deliver aid, education, and healthcare
+                                directly.
+                            </p>
+                        </article>
+
+                        <article class="journey__step journey__step--green">
+                            <span class="journey__num">03</span>
+                            <div class="journey__icon" aria-hidden="true">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="9"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                    />
+                                    <path
+                                        d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+                            </div>
+                            <h3>Lives Change</h3>
+                            <p>
+                                Families gain access, opportunity, and dignity.
+                            </p>
+                        </article>
+
+                        <article class="journey__step journey__step--blue">
+                            <span class="journey__num">04</span>
+                            <div class="journey__icon" aria-hidden="true">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="4"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                    />
+                                    <path
+                                        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+                            </div>
+                            <h3>Better Future</h3>
+                            <p>
+                                Communities grow stronger, generation after
+                                generation.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real Stories -->
+            <section
+                id="stories"
+                class="section stories"
+                aria-labelledby="stories-heading"
+            >
+                <div class="container stories__inner">
+                    <header class="stories__header">
+                        <p class="eyebrow">Social Impact</p>
+                        <h2 id="stories-heading">
+                            Real stories.<br />Real change.
+                        </h2>
+                        <p class="section__intro">
+                            Behind every statistic is a person whose life was
+                            transformed through community support and your
+                            generosity.
+                        </p>
+                        <a href="#" class="link-arrow">Read All Stories</a>
+                    </header>
+
+                    <article class="story-card">
+                        <img
+                            src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=900&q=80"
+                            alt="Young boy smiling outdoors"
+                            loading="lazy"
+                        />
+                        <div class="story-card__content">
+                            <p class="story-card__quote">
+                                &ldquo;From uncertainty to opportunity — Ravi's
+                                story of hope and education.&rdquo;
+                            </p>
+                            <a
+                                href="#"
+                                class="story-card__nav"
+                                aria-label="Read next story"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M4 10h12M12 6l4 4-4 4"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                            <div class="story-card__dots" aria-hidden="true">
+                                <span class="active"></span><span></span
+                                ><span></span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Impact Stats -->
+            <section
+                id="impact"
+                class="section stats-bar"
+                aria-labelledby="impact-heading"
+            >
+                <div class="container">
+                    <h2 id="impact-heading" class="visually-hidden">
+                        Our Impact
+                    </h2>
+                    <div class="stats-bar__grid" role="list">
+                        <div
+                            class="stats-bar__item stats-bar__item--green"
+                            role="listitem"
+                        >
+                            <span class="stats-bar__icon" aria-hidden="true">
+                                <svg
+                                    width="36"
+                                    height="36"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M12 2 7 9h2.5L5 15h5v4h4v-4h5l-4.5-6H17L12 2z"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="stats-bar__number">20,000+</span>
+                            <span class="stats-bar__label">Trees planted</span>
+                        </div>
+                        <div
+                            class="stats-bar__item stats-bar__item--blue"
+                            role="listitem"
+                        >
+                            <span class="stats-bar__icon" aria-hidden="true">
+                                <svg
+                                    width="36"
+                                    height="36"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M3 11h18a9 9 0 0 1-7.5 8.88V21h-3v-1.12A9 9 0 0 1 3 11z"
+                                    />
+                                    <path
+                                        d="M11.3 2.6c.9.9.9 1.8 0 2.7-.9-.9-.9-1.8 0-2.7zM7.6 3.8c.8.8.8 1.6 0 2.4-.8-.8-.8-1.6 0-2.4zM15 3.8c.8.8.8 1.6 0 2.4-.8-.8-.8-1.6 0-2.4z"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="stats-bar__number">50,000+</span>
+                            <span class="stats-bar__label"
+                                >Meals distributed</span
+                            >
+                        </div>
+                        <div
+                            class="stats-bar__item stats-bar__item--green"
+                            role="listitem"
+                        >
+                            <span class="stats-bar__icon" aria-hidden="true">
+                                <svg
+                                    width="36"
+                                    height="36"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <ellipse
+                                        cx="12"
+                                        cy="17"
+                                        rx="4.2"
+                                        ry="3.3"
+                                    />
+                                    <ellipse cx="6.2" cy="11" rx="2" ry="2.5" />
+                                    <ellipse
+                                        cx="17.8"
+                                        cy="11"
+                                        rx="2"
+                                        ry="2.5"
+                                    />
+                                    <ellipse
+                                        cx="9.3"
+                                        cy="7.3"
+                                        rx="1.9"
+                                        ry="2.4"
+                                    />
+                                    <ellipse
+                                        cx="14.7"
+                                        cy="7.3"
+                                        rx="1.9"
+                                        ry="2.4"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="stats-bar__number">50+</span>
+                            <span class="stats-bar__label"
+                                >Animals fed daily</span
+                            >
+                        </div>
+                        <div
+                            class="stats-bar__item stats-bar__item--blue"
+                            role="listitem"
+                        >
+                            <span class="stats-bar__icon" aria-hidden="true">
+                                <svg
+                                    width="36"
+                                    height="36"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M12 3 1 8l11 5 7-3.18V14h2V8L12 3z"
+                                    />
+                                    <path
+                                        d="M5 12.2v2.3c0 1.9 3.1 3.5 7 3.5s7-1.6 7-3.5v-2.3l-7 3.18-7-3.18z"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="stats-bar__number">900+</span>
+                            <span class="stats-bar__label"
+                                >Girls empowered through digital campaigns</span
+                            >
+                        </div>
+                        <div
+                            class="stats-bar__item stats-bar__item--green"
+                            role="listitem"
+                        >
+                            <span class="stats-bar__icon" aria-hidden="true">
+                                <svg
+                                    width="36"
+                                    height="36"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M12 21 4.3 13.3a5.5 5.5 0 1 1 7.7-7.85 5.5 5.5 0 1 1 7.7 7.85L12 21z"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="stats-bar__number">1,500+</span>
+                            <span class="stats-bar__label"
+                                >People fed during COVID-19</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Awards & Achievements (rendered from the list in projects-data.js) -->
+            <section
+                id="awards"
+                class="section awards"
+                aria-labelledby="awards-heading"
+            >
+                <div class="container">
+                    <header class="section__header section__header--center">
+                        <p class="eyebrow">Recognition</p>
+                        <h2 id="awards-heading">Awards &amp; Achievements</h2>
+                        <p class="section__intro">
+                            Milestones and honours that reflect the trust of our
+                            community and the impact we create together.
+                        </p>
+                    </header>
+
+                    <!--
+                        To add an award: open projects-data.js and add an entry
+                        to the AWARDS list. Cards below are generated for you.
+                    -->
+                    <ol
+                        class="awards__grid"
+                        id="awards-grid"
+                        aria-label="List of awards and achievements"
+                    ></ol>
+                </div>
+            </section>
+
+            <!-- Call to Action / Donate -->
+            <section
+                id="get-involved"
+                class="section cta"
+                aria-labelledby="cta-heading"
+            >
+                <div class="container">
+                    <div class="cta__card">
+                        <div class="cta__content">
+                            <p class="eyebrow">Get Involved</p>
+                            <h2 id="cta-heading">
+                                Be the reason someone smiles today
+                            </h2>
+                            <p>
+                                Choose an amount and give in seconds. Every
+                                contribution — no matter how small — directly
+                                funds education, clean water, and healthcare for
+                                communities in need.
+                            </p>
+                            <ul class="cta__assurances">
+                                <li>98% of funds go straight to programs</li>
+                                <li>80G tax-exempt receipt provided</li>
+                                <li>Cancel monthly giving anytime</li>
+                            </ul>
+                        </div>
+
+                        <!-- Donate Card -->
+                        <form
+                            class="donate-card"
+                            aria-labelledby="donate-card-title"
+                            onsubmit="return false;"
+                        >
+                            <h3
+                                id="donate-card-title"
+                                class="donate-card__title"
+                            >
+                                Make a donation
+                            </h3>
+
+                            <div
+                                class="donate-card__tabs"
+                                role="tablist"
+                                aria-label="Donation frequency"
+                            >
+                                <button
+                                    type="button"
+                                    class="donate-tab is-active"
+                                    role="tab"
+                                    aria-selected="true"
+                                    data-frequency="monthly"
+                                >
+                                    Monthly
+                                </button>
+                                <button
+                                    type="button"
+                                    class="donate-tab"
+                                    role="tab"
+                                    aria-selected="false"
+                                    data-frequency="once"
+                                >
+                                    Give Once
+                                </button>
+                            </div>
+
+                            <p class="donate-card__label">Choose an amount</p>
+                            <div
+                                class="donate-amounts"
+                                role="group"
+                                aria-label="Preset donation amounts"
+                            >
+                                <button
+                                    type="button"
+                                    class="donate-amount"
+                                    data-amount="50"
+                                >
+                                    &#8377;50
+                                </button>
+                                <button
+                                    type="button"
+                                    class="donate-amount is-active"
+                                    data-amount="100"
+                                >
+                                    &#8377;100
+                                </button>
+                                <button
+                                    type="button"
+                                    class="donate-amount"
+                                    data-amount="200"
+                                >
+                                    &#8377;200
+                                </button>
+                                <button
+                                    type="button"
+                                    class="donate-amount"
+                                    data-amount="400"
+                                >
+                                    &#8377;5,000
+                                </button>
+                                <button
+                                    type="button"
+                                    class="donate-amount"
+                                    data-amount="10000"
+                                >
+                                    &#8377;10,000
+                                </button>
+                                <button
+                                    type="button"
+                                    class="donate-amount"
+                                    data-amount="25000"
+                                >
+                                    &#8377;25,000
+                                </button>
+                            </div>
+
+                            <div class="donate-card__custom">
+                                <label
+                                    for="custom-amount"
+                                    class="visually-hidden"
+                                    >Enter a custom amount in rupees</label
+                                >
+                                <span class="donate-card__currency"
+                                    >&#8377;</span
+                                >
+                                <input
+                                    type="number"
+                                    id="custom-amount"
+                                    min="1"
+                                    step="1"
+                                    inputmode="numeric"
+                                    placeholder="Other amount"
+                                />
+                            </div>
+
+                            <p class="donate-card__impact">
+                                <span aria-hidden="true">&#10084;</span>
+                                Provides
+                                <strong id="impact-count">1</strong>
+                                <span id="impact-noun">months</span> of school
+                                supplies for a child in need.
+                            </p>
+
+                            <div class="donate-card__summary">
+                                <span>Your gift</span>
+                                <strong
+                                    >&#8377;<span id="donate-total"
+                                        >1,000</span
+                                    ></strong
+                                ><span
+                                    id="donate-frequency"
+                                    class="donate-card__freq"
+                                    >/ month</span
+                                >
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn--pill btn--red btn--block donate-card__submit"
+                            >
+                                Donate
+                                <span id="donate-btn-amount">&#8377;1,000</span>
+                            </button>
+
+                            <p class="donate-card__secure">
+                                <span aria-hidden="true">&#128274;</span>
+                                Secure payment. You can cancel anytime.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials (rendered from the list in projects-data.js) -->
+            <section
+                id="testimonials"
+                class="section testimonials"
+                aria-labelledby="testimonials-heading"
+            >
+                <div class="container">
+                    <header class="section__header section__header--center">
+                        <p class="eyebrow">Voices of Change</p>
+                        <h2 id="testimonials-heading">
+                            What our community says
+                        </h2>
+                        <p class="section__intro">
+                            The people we serve, our volunteers, and our donors
+                            share what InAmigos means to them.
+                        </p>
+                    </header>
+
+                    <!--
+                        To add a testimonial: open projects-data.js and add an
+                        entry to the TESTIMONIALS list. Cards below are generated.
+                    -->
+                    <div
+                        class="testimonials__grid"
+                        id="testimonials-grid"
+                    ></div>
+                </div>
+            </section>
+
+            <!-- FAQ (rendered from the list in projects-data.js) -->
+            <section id="faq" class="section faq" aria-labelledby="faq-heading">
+                <div class="container faq__inner">
+                    <header class="section__header section__header--center">
+                        <p class="eyebrow">Good to Know</p>
+                        <h2 id="faq-heading">Frequently asked questions</h2>
+                        <p class="section__intro">
+                            Everything you might want to know about donating,
+                            volunteering, and how we work.
+                        </p>
+                    </header>
+
+                    <!--
+                        To add a question: open projects-data.js and add an
+                        entry to the FAQS list. Items below are generated.
+                    -->
+                    <div class="faq__list" id="faq-list"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer__inner">
+                <div class="footer__brand">
+                    <a class="nav__logo" href="/" aria-label="InAmigos — Home">
+                        <img
+                            src="./assets/logo/logo-dark.jpg"
+                            alt="InAmigos Foundation logo"
+                            class="logo logo--footer"
+                        />
+                    </a>
+                    <p>
+                        Registered under Section 8 of the Companies Act.
+                        Tax-exempt donations (80G eligible).
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Our Work</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#get-involved">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer__contact">
+                    <h3>Contact</h3>
+                    <address>
+                        <p>14 Community Lane, Bandra West, Mumbai 400050</p>
+                        <p>
+                            <a href="mailto:hello@InAmigos.org"
+                                >hello@InAmigos.org</a
+                            >
+                        </p>
+                        <p><a href="tel:+912212345678">+91 22 1234 5678</a></p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer__bottom container">
+                <p>&copy; 2026 InAmigos Foundation. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script src="./projects-data.js"></script>
+        <script src="./scripts.js"></script>
+    </body>
+</html>
