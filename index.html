@@ -8,13 +8,37 @@
             content="InAmigos — spreading awareness about our community projects and creating lasting social impact. Donate, volunteer, or join us today."
         />
         <title>InAmigos Foundation</title>
+        <link
+            rel="preload"
+            as="image"
+            href="./assets/hero-mobile.webp"
+            type="image/webp"
+            media="(max-width: 900px)"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            as="image"
+            href="./assets/hero.webp"
+            type="image/webp"
+            media="(min-width: 901px)"
+            fetchpriority="high"
+        />
         <link rel="stylesheet" href="styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
+            media="print"
+            onload="this.media='all'"
         />
+        <noscript>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+                rel="stylesheet"
+            />
+        </noscript>
     </head>
     <body>
         <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -93,12 +117,36 @@
                         thrive.
                     </h1>
                     <div class="hero__banner">
-                        <img
-                            src="./assets/hero.png"
-                            alt="InAmigos campaign banner: Small acts, big change — lives touched, villages reached, and trees planted across our programmes."
-                            class="hero__banner-img"
-                            loading="eager"
-                        />
+                        <picture>
+                            <source
+                                media="(max-width: 900px)"
+                                srcset="./assets/hero-mobile.webp"
+                                type="image/webp"
+                            />
+                            <source
+                                media="(max-width: 900px)"
+                                srcset="./assets/hero-mobile.jpg"
+                                type="image/jpeg"
+                            />
+                            <source
+                                srcset="./assets/hero.webp"
+                                type="image/webp"
+                            />
+                            <source
+                                srcset="./assets/hero.jpg"
+                                type="image/jpeg"
+                            />
+                            <img
+                                src="./assets/hero.jpg"
+                                alt="InAmigos campaign banner: Small acts, big change — lives touched, villages reached, and trees planted across our programmes."
+                                class="hero__banner-img"
+                                width="1200"
+                                height="800"
+                                loading="eager"
+                                fetchpriority="high"
+                                decoding="sync"
+                            />
+                        </picture>
                     </div>
                     <div class="hero__actions">
                         <a
