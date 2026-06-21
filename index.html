@@ -11,30 +11,8 @@
         <link
             rel="preload"
             as="image"
-            href="./assets/hero/hero-640.webp"
-            type="image/webp"
-            media="(max-width: 768px)"
+            href="./assets/hero-1.png"
             fetchpriority="high"
-            imagesrcset="
-                ./assets/hero/hero-480.webp 480w,
-                ./assets/hero/hero-640.webp 640w,
-                ./assets/hero/hero-768.webp 768w
-            "
-            imagesizes="100vw"
-        />
-        <link
-            rel="preload"
-            as="image"
-            href="./assets/hero/hero-1200.webp"
-            type="image/webp"
-            media="(min-width: 769px)"
-            fetchpriority="high"
-            imagesrcset="
-                ./assets/hero/hero-1024.webp 1024w,
-                ./assets/hero/hero-1200.webp 1200w,
-                ./assets/hero/hero-1536.webp 1536w
-            "
-            imagesizes="(max-width: 1200px) 100vw, 1200px"
         />
         <link rel="stylesheet" href="styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -120,86 +98,88 @@
         </header>
 
         <main id="main-content">
-            <!-- Hero — full banner image (hero.png is a composite; don't crop in a side column) -->
-            <section class="hero" aria-labelledby="hero-heading">
-                <div class="container hero__inner">
-                    <h1 id="hero-heading" class="visually-hidden">
-                        Small acts. Big change. Together, we build a world where
-                        every child, every life, and every tree has a chance to
-                        thrive.
-                    </h1>
-                    <div class="hero__banner">
-                        <picture>
-                            <source
-                                type="image/webp"
-                                srcset="
-                                    ./assets/hero/hero-480.webp 480w,
-                                    ./assets/hero/hero-640.webp 640w,
-                                    ./assets/hero/hero-768.webp 768w,
-                                    ./assets/hero/hero-1024.webp 1024w,
-                                    ./assets/hero/hero-1200.webp 1200w,
-                                    ./assets/hero/hero-1536.webp 1536w
-                                "
-                                sizes="(max-width: 1200px) 100vw, 1200px"
-                            />
-                            <source
-                                type="image/jpeg"
-                                srcset="
-                                    ./assets/hero/hero-480.jpg 480w,
-                                    ./assets/hero/hero-640.jpg 640w,
-                                    ./assets/hero/hero-768.jpg 768w,
-                                    ./assets/hero/hero-1024.jpg 1024w,
-                                    ./assets/hero/hero-1200.jpg 1200w,
-                                    ./assets/hero/hero-1536.jpg 1536w
-                                "
-                                sizes="(max-width: 1200px) 100vw, 1200px"
-                            />
-                            <img
-                                src="./assets/hero/hero-1200.jpg"
-                                srcset="
-                                    ./assets/hero/hero-480.jpg 480w,
-                                    ./assets/hero/hero-640.jpg 640w,
-                                    ./assets/hero/hero-768.jpg 768w,
-                                    ./assets/hero/hero-1024.jpg 1024w,
-                                    ./assets/hero/hero-1200.jpg 1200w,
-                                    ./assets/hero/hero-1536.jpg 1536w
-                                "
-                                sizes="(max-width: 1200px) 100vw, 1200px"
-                                alt="InAmigos campaign banner: Small acts, big change — lives touched, villages reached, and trees planted across our programmes."
-                                class="hero__banner-img"
-                                width="1536"
-                                height="1024"
-                                loading="eager"
-                                fetchpriority="high"
-                                decoding="sync"
-                            />
-                        </picture>
-                    </div>
-                    <div class="hero__actions">
-                        <a
-                            href="#get-involved"
-                            class="btn btn--pill btn--red"
-                        >
-                            Donate Now
-                            <svg
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                                aria-hidden="true"
+            <!-- Hero — side by side on desktop; image first, then text on mobile -->
+            <section class="hero hero--split" aria-labelledby="hero-heading">
+                <div class="container hero__split">
+                    <div class="hero__content">
+                        <p class="hero__eyebrow">
+                            <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+                            Every act of kindness matters
+                        </p>
+                        <h1 id="hero-heading">
+                            <span class="hero__heading-line"
+                                >Small action</span
                             >
-                                <path
-                                    d="M3 8h10M9 4l4 4-4 4"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                        </a>
-                        <a href="#projects" class="link-arrow"
-                            >Explore Our Work</a
-                        >
+                            <span class="hero__heading-accent">
+                                <span class="hero__heading-accent-inner"
+                                    >big impact</span
+                                >
+                            </span>
+                        </h1>
+                        <div class="hero__message">
+                            <p class="hero__subheading">
+                                Together, we build a world where
+                                <strong
+                                    class="hero__highlight hero__highlight--blue"
+                                    >every life is valued</strong
+                                >
+                                and every
+                                <strong
+                                    class="hero__highlight hero__highlight--yellow"
+                                    >act of kindness</strong
+                                >
+                                creates a
+                                <strong
+                                    class="hero__highlight hero__highlight--blue"
+                                    >better tomorrow</strong>.
+                            </p>
+                        </div>
+                        <p class="hero__hook">
+                            <span class="hero__hook-icon" aria-hidden="true"
+                                >→</span
+                            >
+                            One action today can change someone's entire
+                            tomorrow
+                        </p>
+                        <div class="hero__actions">
+                            <a
+                                href="#get-involved"
+                                class="btn btn--pill btn--red"
+                            >
+                                Donate Now
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M3 8h10M9 4l4 4-4 4"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                            <a href="#projects" class="link-arrow"
+                                >Explore Our Work</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="hero__visual">
+                        <img
+                            src="./assets/hero-1.png"
+                            alt="InAmigos impact collage — communities, children, meals, trees, and animals helped through kindness."
+                            class="hero__photo"
+                            width="1200"
+                            height="800"
+                            loading="eager"
+                            fetchpriority="high"
+                            decoding="async"
+                        />
                     </div>
                 </div>
             </section>
