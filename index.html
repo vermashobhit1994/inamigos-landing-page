@@ -82,7 +82,7 @@
                         <li><a href="#contact">Contact Us</a></li>
                         <li><a href="#mission">Mission</a></li>
                     </ul>
-                    <a href="#get-involved" class="btn btn--pill btn--red"
+                    <a href="#donate-form" class="btn btn--pill btn--red"
                         >Donate</a
                     >
                 </div>
@@ -112,7 +112,7 @@
                     <li><a href="#mission">Mission</a></li>
                 </ul>
                 <a
-                    href="#get-involved"
+                    href="#donate-form"
                     class="btn btn--pill btn--red btn--block"
                     >Donate</a
                 >
@@ -179,8 +179,9 @@
                         </p>
                         <div class="hero__actions">
                             <a
-                                href="#get-involved"
-                                class="btn btn--pill btn--red"
+                                href="#donate-form"
+                                class="btn btn--pill btn--red hero__donate-btn"
+                                data-scroll-target="donate-form"
                             >
                                 Donate Now
                                 <svg
@@ -304,7 +305,7 @@
                 <div class="container" id="journey-content"></div>
             </section>
 
-            <!-- Real Stories -->
+            <!-- Featured story + stories.html listing (projects-data.js STORIES) -->
             <section
                 id="stories"
                 class="section stories"
@@ -321,47 +322,13 @@
                             transformed through community support and your
                             generosity.
                         </p>
-                        <a href="#" class="link-arrow">Read All Stories</a>
+                        <a href="stories.html" class="link-arrow"
+                            >Read All Stories</a
+                        >
                     </header>
 
-                    <article class="story-card">
-                        <img
-                            src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=900&q=80"
-                            alt="Young boy smiling outdoors"
-                            loading="lazy"
-                        />
-                        <div class="story-card__content">
-                            <p class="story-card__quote">
-                                &ldquo;From uncertainty to opportunity — Ravi's
-                                story of hope and education.&rdquo;
-                            </p>
-                            <a
-                                href="#"
-                                class="story-card__nav"
-                                aria-label="Read next story"
-                            >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                        d="M4 10h12M12 6l4 4-4 4"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
-                            </a>
-                            <div class="story-card__dots" aria-hidden="true">
-                                <span class="active"></span><span></span
-                                ><span></span>
-                            </div>
-                        </div>
-                    </article>
+                    <!-- Featured story (from projects-data.js STORIES) -->
+                    <div id="stories-spotlight"></div>
                 </div>
             </section>
 
@@ -530,7 +497,7 @@
 
                     <!--
                         To add an award: open projects-data.js and add an entry
-                        to the AWARDS list. Cards below are generated for you.
+                        to AWARDS. Optional file and viewUrl for Download/View.
                     -->
                     <ol
                         class="awards__grid"
@@ -566,7 +533,7 @@
                             </ul>
                         </div>
 
-                        <!-- Donate Card -->
+                        <div id="donate-form" class="cta__donate">
                         <form
                             class="donate-card"
                             aria-labelledby="donate-card-title"
@@ -718,6 +685,7 @@
                                 Secure payment. You can cancel anytime.
                             </p>
                         </form>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -742,7 +710,7 @@
 
                     <!--
                         To add a testimonial: open projects-data.js and add an
-                        entry to the TESTIMONIALS list. Cards below are generated.
+                        entry to TESTIMONIALS. Optional video + videoLabel for a link.
                     -->
                     <div
                         class="testimonials__grid"
@@ -816,17 +784,18 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#projects">Our Work</a></li>
                         <li><a href="#impact">Impact</a></li>
-                        <li><a href="#get-involved">Donate</a></li>
+                        <li><a href="#donate-form">Donate</a></li>
                         <li><a href="#licenses">Licenses</a></li>
                     </ul>
                 </div>
                 <div class="footer__contact">
                     <h3>Contact</h3>
                     <address>
-                        <p>Ward No. 5, Gram Post,
-                            Sipat Ujwal Nagar,
-                            Bilaspur. Chhattisgarh
-                            Pincode: 495555</p>
+                        <p>
+                            Ward No. 5, Gram Post, Sipat Ujwal Nagar,<br />
+                            Bilaspur, Chhattisgarh<br />
+                            Pincode: 495555
+                        </p>
                         <p>
                             <a href="mailto:hello@InAmigos.org"
                                 >inamigosfoundation@gmail.com</a

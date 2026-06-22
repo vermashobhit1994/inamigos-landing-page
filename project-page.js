@@ -161,7 +161,7 @@
     escapeHtml(project.title) +
     "</h3>" +
     "<p>Your support helps us reach more people and do more good.</p>" +
-    '<a class="btn btn--pill btn--red btn--block" href="index.html#get-involved">Donate now</a>' +
+    '<a class="btn btn--pill btn--red btn--block" href="index.html#donate-form">Donate now</a>' +
     "</div>";
 
   const aside =
@@ -241,7 +241,7 @@
     escapeHtml(project.description) +
     "</p>" +
     '<div class="project-hero__actions">' +
-    '<a class="btn btn--pill btn--red" href="index.html#get-involved">Donate to ' +
+    '<a class="btn btn--pill btn--red" href="index.html#donate-form">Donate to ' +
     escapeHtml(project.title) +
     "</a>" +
     '<a class="btn btn--pill btn--outline project-hero__btn-secondary project-hero__btn-secondary--' +
@@ -274,6 +274,6 @@
     '<a class="btn btn--pill btn--outline project-actions-bar__back project-actions-bar__back--' +
     accent +
     '" href="index.html#projects">All projects</a>' +
-    '<a class="btn btn--pill btn--red project-actions-bar__donate" href="index.html#get-involved">Donate</a>' +
+    '<a class="btn btn--pill btn--red project-actions-bar__donate" href="index.html#donate-form">Donate</a>' +
     "</div>";
 })();

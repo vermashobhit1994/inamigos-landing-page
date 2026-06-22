@@ -152,12 +152,17 @@ function renderAwards() {
   }
 
   grid.innerHTML = awards
-    .map(function (award, index) {
+    .map(function (award) {
       const accent = award.accent === "blue" ? "blue" : "green";
-      const featured =
-        award.featured || index === 0 ? " award-card--featured" : "";
+      const featured = award.featured ? " award-card--featured" : "";
       const imageSrc = award.image || "./assets/awards/placeholder.jpg";
       const imageAlt = award.alt || award.title || "Award photo";
+      const viewUrl = award.viewUrl || award.image || imageSrc;
+      const fileSrc = award.file || award.image || imageSrc;
+      const downloadName = String(award.title || "award")
+        .trim()
+        .replace(/[^a-z0-9]+/gi, "-")
+        .replace(/^-+|-+$/g, "");
 
       return (
         '<li class="award-card award-card--' +
@@ -193,6 +198,16 @@ function renderAwards() {
             escapeHtml(award.detail) +
             "</p>"
           : "") +
+        '<div class="award-card__actions">' +
+        '<a href="' +
+        escapeHtml(viewUrl) +
+        '" class="award-card__btn award-card__btn--view" target="_blank" rel="noopener noreferrer">View</a>' +
+        '<a href="' +
+        escapeHtml(fileSrc) +
+        '" class="award-card__btn award-card__btn--download" download="' +
+        escapeHtml(downloadName || "award") +
+        '">Download</a>' +
+        "</div>" +
         "</div>" +
         "</li>"
       );
@@ -283,6 +298,7 @@ function renderTestimonials() {
   grid.innerHTML = items
     .map(function (item) {
       const accent = item.accent === "blue" ? "blue" : "green";
+      const hasVideo = Boolean(item.video);
       const avatar = item.avatar
         ? '<img class="testimonial-card__avatar" src="' +
           escapeHtml(item.avatar) +
@@ -293,14 +309,25 @@ function renderTestimonials() {
           escapeHtml(getInitials(item.name || "")) +
           "</span>";
 
+      const videoHtml = item.video
+        ? '<a href="' +
+          escapeHtml(item.video) +
+          '" class="testimonial-card__video" target="_blank" rel="noopener noreferrer">' +
+          '<span class="testimonial-card__video-icon" aria-hidden="true">▶</span>' +
+          escapeHtml(item.videoLabel || "Watch video") +
+          "</a>"
+        : "";
+
       return (
         '<figure class="testimonial-card testimonial-card--' +
         accent +
+        (hasVideo ? " testimonial-card--has-video" : "") +
         '">' +
         '<span class="testimonial-card__mark" aria-hidden="true">&ldquo;</span>' +
         '<blockquote class="testimonial-card__quote">' +
         escapeHtml(item.quote || "") +
         "</blockquote>" +
+        videoHtml +
         '<figcaption class="testimonial-card__person">' +
         avatar +
         '<span class="testimonial-card__meta">' +
@@ -318,6 +345,69 @@ function renderTestimonials() {
       );
     })
     .join("");
+}
+
+function renderStoriesSpotlight() {
+  const mount = document.getElementById("stories-spotlight");
+  if (!mount) return;
+
+  const stories = Array.isArray(window.STORIES) ? window.STORIES : [];
+  if (!stories.length) return;
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  const slugify =
+    typeof window.storySlug === "function"
+      ? window.storySlug
+      : function (story) {
+          return String((story && story.title) || "")
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+        };
+
+  const story =
+    stories.find(function (item) {
+      return item.featured;
+    }) || stories[0];
+
+  const href = "story.html?p=" + encodeURIComponent(slugify(story));
+
+  const arrowSvg =
+    '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+    '<path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" ' +
+    'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  mount.innerHTML =
+    '<article class="story-card">' +
+    '<img src="' +
+    escapeHtml(story.image) +
+    '" alt="' +
+    escapeHtml(story.alt || story.title || "") +
+    '" loading="lazy" />' +
+    '<div class="story-card__content">' +
+    '<h3 class="story-card__title">' +
+    escapeHtml(story.title || "") +
+    "</h3>" +
+    '<p class="story-card__quote">' +
+    escapeHtml(story.description || "") +
+    "</p>" +
+    '<a href="' +
+    href +
+    '" class="story-card__nav" aria-label="Read ' +
+    escapeHtml(story.title || "story") +
+    '">' +
+    arrowSvg +
+    "</a>" +
+    "</div>" +
+    "</article>";
 }
 
 function renderAbout() {
@@ -549,7 +639,7 @@ function renderJourney() {
     (journey.cta && journey.cta.label
       ? '<p class="journey__cta-wrap">' +
         '<a href="' +
-        escapeHtml(journey.cta.href || "#get-involved") +
+        escapeHtml(journey.cta.href || "#donate-form") +
         '" class="btn btn--pill btn--red journey__cta">' +
         escapeHtml(journey.cta.label) +
         "</a></p>"
@@ -780,20 +870,17 @@ function initSectionBreadcrumbs() {
       const id = link.getAttribute("data-section-id");
       if (id === "top") {
         e.preventDefault();
+        e.stopPropagation();
+        closeMobileMenu();
         window.scrollTo({ top: 0, behavior: "smooth" });
         setActive("top");
+        return;
       }
 
-      const menuBtn = document.querySelector(".nav__menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-      if (
-        menuBtn &&
-        mobileMenu &&
-        menuBtn.getAttribute("aria-expanded") === "true"
-      ) {
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.classList.remove("is-open");
-        mobileMenu.hidden = true;
+      if (id) {
+        e.preventDefault();
+        e.stopPropagation();
+        scrollToPageTarget(id);
       }
     });
   });
@@ -853,15 +940,97 @@ function initSectionBreadcrumbs() {
   setActive(window.scrollY < 48 ? "top" : targets[0].id);
 }
 
+function closeMobileMenu() {
+  const menuBtn = document.querySelector(".nav__menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (!menuBtn || !mobileMenu) return;
+  menuBtn.setAttribute("aria-expanded", "false");
+  menuBtn.classList.remove("is-open");
+  mobileMenu.hidden = true;
+}
+
+function scrollToPageTarget(id) {
+  const target = document.getElementById(id);
+  if (!target) return false;
+
+  closeMobileMenu();
+
+  const performScroll = function () {
+    const offset =
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--header-offset"
+        ),
+        10
+      ) || 116;
+    const top =
+      target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: "smooth",
+    });
+
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, "", "#" + id);
+    }
+  };
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(performScroll);
+  });
+
+  return true;
+}
+
+function initInPageAnchorLinks() {
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[href^='#'], a[data-scroll-target]");
+    if (!link) return;
+
+    const scrollTarget = link.getAttribute("data-scroll-target");
+    const href = link.getAttribute("href");
+    const id = scrollTarget
+      ? scrollTarget
+      : href && href.startsWith("#") && href.length > 1
+        ? decodeURIComponent(href.slice(1))
+        : "";
+
+    if (!id || !document.getElementById(id)) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    scrollToPageTarget(id);
+  });
+}
+
+function safeRender(name, fn) {
+  try {
+    fn();
+  } catch (err) {
+    console.error("InAmigos: failed to render " + name, err);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  renderProjects();
-  renderAbout();
-  renderJourney();
-  initSectionBreadcrumbs();
-  renderAwards();
-  renderTestimonials();
-  renderFaqs();
-  renderContact();
+  safeRender("projects", renderProjects);
+  safeRender("about", renderAbout);
+  safeRender("contact", renderContact);
+  safeRender("journey", renderJourney);
+  safeRender("stories", renderStoriesSpotlight);
+  safeRender("breadcrumbs", initSectionBreadcrumbs);
+  safeRender("awards", renderAwards);
+  safeRender("testimonials", renderTestimonials);
+  safeRender("faqs", renderFaqs);
+
+  initInPageAnchorLinks();
+
+  if (window.location.hash.length > 1) {
+    const hashId = decodeURIComponent(window.location.hash.slice(1));
+    setTimeout(function () {
+      scrollToPageTarget(hashId);
+    }, 0);
+  }
 
   /* ---------- Mobile navigation menu ---------- */
   const menuBtn = document.querySelector(".nav__menu-btn");
@@ -878,13 +1047,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     menuBtn.addEventListener("click", function () {
       toggleMenu();
-    });
-
-    // Close the menu after tapping a link
-    mobileMenu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        toggleMenu(false);
-      });
     });
 
     // Close on Escape
