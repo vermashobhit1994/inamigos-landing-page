@@ -3055,9 +3055,20 @@ address {
     display: none;
 }
 
-.donate-card__submit:disabled {
+.donate-card__submit:disabled,
+.donate-card__submit:disabled:hover,
+.donate-card__submit:disabled:active,
+.donate-card__submit:disabled:focus,
+.donate-card__submit:disabled:focus-visible {
     opacity: 0.55;
     cursor: not-allowed;
+    background-color: var(--color-red);
+    color: var(--color-bg-white);
+    pointer-events: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+    transform: none;
 }
 
 .donate-card__currency {

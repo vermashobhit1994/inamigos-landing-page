@@ -1093,6 +1093,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const months = Math.max(1, Math.round(safeAmount / COST_PER_MONTH));
     impactCountEl.textContent = formatNumber(months);
     impactNounEl.textContent = months === 1 ? "month" : "months";
+
+    updateDonateFormState();
+  };
+
+  const isDonateAmountValid = function () {
+    const raw = customInput ? customInput.value.trim() : "";
+    const value = Number(raw);
+    const isBelowMin =
+      raw !== "" && (Number.isNaN(value) || value < MIN_CUSTOM_AMOUNT);
+
+    return amount > 0 && !isBelowMin;
   };
 
   // Frequency tabs
@@ -1109,20 +1120,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  const updateCustomAmountHint = function () {
-    if (!customInput || !customHint) return;
-
-    const raw = customInput.value.trim();
+  const updateDonateFormState = function () {
+    const raw = customInput ? customInput.value.trim() : "";
     const value = Number(raw);
-    const isBelowMin = raw !== "" && (Number.isNaN(value) || value < MIN_CUSTOM_AMOUNT);
+    const isBelowMin =
+      raw !== "" && (Number.isNaN(value) || value < MIN_CUSTOM_AMOUNT);
+    const canDonate = amount > 0 && !isBelowMin;
 
-    customHint.hidden = !isBelowMin;
-    customInput.setAttribute("aria-invalid", isBelowMin ? "true" : "false");
+    if (customHint) {
+      customHint.hidden = !isBelowMin;
+    }
+
+    if (customInput) {
+      customInput.setAttribute("aria-invalid", isBelowMin ? "true" : "false");
+    }
 
     if (submitBtn) {
-      submitBtn.disabled = isBelowMin;
+      submitBtn.disabled = !canDonate;
+      submitBtn.setAttribute("aria-disabled", canDonate ? "false" : "true");
     }
   };
+
+  donateCard.addEventListener("submit", function (event) {
+    if (!isDonateAmountValid()) {
+      event.preventDefault();
+    }
+  });
+
+  if (submitBtn) {
+    submitBtn.addEventListener("click", function (event) {
+      if (!isDonateAmountValid()) {
+        event.preventDefault();
+      }
+    });
+  }
 
   // Preset amount buttons
   amountButtons.forEach(function (button) {
@@ -1133,7 +1164,6 @@ document.addEventListener("DOMContentLoaded", function () {
       button.classList.add("is-active");
       amount = Number(button.dataset.amount);
       if (customInput) customInput.value = "";
-      updateCustomAmountHint();
       updateUI();
     });
   });
@@ -1145,13 +1175,11 @@ document.addEventListener("DOMContentLoaded", function () {
         b.classList.remove("is-active");
       });
       amount = Number(customInput.value) || 0;
-      updateCustomAmountHint();
       updateUI();
     });
 
-    customInput.addEventListener("blur", updateCustomAmountHint);
+    customInput.addEventListener("blur", updateDonateFormState);
   }
 
-  updateCustomAmountHint();
   updateUI();
 });
