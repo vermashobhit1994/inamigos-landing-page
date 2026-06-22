@@ -577,13 +577,7 @@
                                 role="group"
                                 aria-label="Preset donation amounts"
                             >
-                                <button
-                                    type="button"
-                                    class="donate-amount"
-                                    data-amount="50"
-                                >
-                                    &#8377;50
-                                </button>
+                               
                                 <button
                                     type="button"
                                     class="donate-amount is-active"
@@ -601,7 +595,7 @@
                                 <button
                                     type="button"
                                     class="donate-amount"
-                                    data-amount="400"
+                                    data-amount="5000"
                                 >
                                     &#8377;5,000
                                 </button>
@@ -621,23 +615,39 @@
                                 </button>
                             </div>
 
-                            <div class="donate-card__custom">
-                                <label
-                                    for="custom-amount"
-                                    class="visually-hidden"
-                                    >Enter a custom amount in rupees</label
+                            <div class="donate-card__custom-wrap">
+                                <div class="donate-card__custom">
+                                    <label
+                                        for="custom-amount"
+                                        class="visually-hidden"
+                                        >Enter a custom amount in rupees</label
+                                    >
+                                    <span class="donate-card__currency"
+                                        >&#8377;</span
+                                    >
+                                    <input
+                                        type="number"
+                                        id="custom-amount"
+                                        min="100"
+                                        step="1"
+                                        inputmode="numeric"
+                                        placeholder="Other amount"
+                                        aria-describedby="custom-amount-hint"
+                                    />
+                                </div>
+                                <p
+                                    id="custom-amount-hint"
+                                    class="donate-card__custom-hint"
+                                    role="status"
+                                    hidden
                                 >
-                                <span class="donate-card__currency"
-                                    >&#8377;</span
-                                >
-                                <input
-                                    type="number"
-                                    id="custom-amount"
-                                    min="1"
-                                    step="1"
-                                    inputmode="numeric"
-                                    placeholder="Other amount"
-                                />
+                                    Please enter at least
+                                    <strong class="donate-card__custom-hint-amount"
+                                        >&#8377;100</strong
+                                    >
+                                    — every contribution helps us reach more
+                                    people in need.
+                                </p>
                             </div>
 
                             <p class="donate-card__impact">
@@ -663,7 +673,7 @@
                                 <span>Your gift</span>
                                 <strong
                                     >&#8377;<span id="donate-total"
-                                        >1,000</span
+                                        >100</span
                                     ></strong
                                 ><span
                                     id="donate-frequency"
@@ -677,7 +687,7 @@
                                 class="btn btn--pill btn--red btn--block donate-card__submit"
                             >
                                 Donate
-                                <span id="donate-btn-amount">&#8377;1,000</span>
+                                <span id="donate-btn-amount">&#8377;100</span>
                             </button>
 
                             <p class="donate-card__secure">

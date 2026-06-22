@@ -3014,6 +3014,10 @@ address {
     color: var(--color-bg-white);
 }
 
+.donate-card__custom-wrap {
+    margin-bottom: var(--space-md);
+}
+
 .donate-card__custom {
     display: flex;
     align-items: center;
@@ -3022,12 +3026,38 @@ address {
     background-color: var(--color-bg-white);
     border: 1.5px solid var(--color-yellow);
     border-radius: var(--radius-sm);
-    margin-bottom: var(--space-md);
     transition: border-color var(--transition);
 }
 
 .donate-card__custom:focus-within {
     border-color: var(--color-red);
+}
+
+.donate-card__custom:has(input[aria-invalid="true"]) {
+    border-color: var(--color-blue-dark);
+}
+
+.donate-card__custom-hint {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-blue-dark);
+}
+
+.donate-card__custom-hint-amount {
+    color: var(--color-black);
+    font-weight: 800;
+}
+
+.donate-card__custom-hint[hidden] {
+    display: none;
+}
+
+.donate-card__submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 .donate-card__currency {

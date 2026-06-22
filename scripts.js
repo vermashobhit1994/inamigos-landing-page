@@ -1062,6 +1062,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabs = donateCard.querySelectorAll(".donate-tab");
   const amountButtons = donateCard.querySelectorAll(".donate-amount");
   const customInput = donateCard.querySelector("#custom-amount");
+  const customHint = donateCard.querySelector("#custom-amount-hint");
+  const submitBtn = donateCard.querySelector(".donate-card__submit");
 
   const totalEl = donateCard.querySelector("#donate-total");
   const freqEl = donateCard.querySelector("#donate-frequency");
@@ -1071,7 +1073,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // State
   let frequency = "monthly";
-  let amount = 1000;
+  let amount = 100;
+  const MIN_CUSTOM_AMOUNT = 100;
 
   // ₹350 ≈ one month of school supplies for one child
   const COST_PER_MONTH = 350;
@@ -1106,6 +1109,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  const updateCustomAmountHint = function () {
+    if (!customInput || !customHint) return;
+
+    const raw = customInput.value.trim();
+    const value = Number(raw);
+    const isBelowMin = raw !== "" && (Number.isNaN(value) || value < MIN_CUSTOM_AMOUNT);
+
+    customHint.hidden = !isBelowMin;
+    customInput.setAttribute("aria-invalid", isBelowMin ? "true" : "false");
+
+    if (submitBtn) {
+      submitBtn.disabled = isBelowMin;
+    }
+  };
+
   // Preset amount buttons
   amountButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -1115,6 +1133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       button.classList.add("is-active");
       amount = Number(button.dataset.amount);
       if (customInput) customInput.value = "";
+      updateCustomAmountHint();
       updateUI();
     });
   });
@@ -1126,9 +1145,13 @@ document.addEventListener("DOMContentLoaded", function () {
         b.classList.remove("is-active");
       });
       amount = Number(customInput.value) || 0;
+      updateCustomAmountHint();
       updateUI();
     });
+
+    customInput.addEventListener("blur", updateCustomAmountHint);
   }
 
+  updateCustomAmountHint();
   updateUI();
 });
