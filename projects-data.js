@@ -23,11 +23,36 @@
 //                               "wide"  — 2 columns
 //                               "tall"  — 2 rows
 //                               "small" — standard 1x1 (default)
+//   layout       optional    "split" — photo on top, text panel below
+//                               (best for portrait photos; use with "tall")
+//   imageFit     optional    "contain" — show full image without cropping
+//                               (best for square collages in wide tiles)
+//   imageSrcset  optional    Responsive card image sizes, e.g.
+//                               "./assets/card-600.jpg 600w, ./assets/card-1200.jpg 1200w"
+//   imageSizes   optional    sizes attribute for the card image srcset
 //   stat         optional    A key impact number, shown as a highlight chip.
 //                               e.g. "50,000+ meals served"
 //   highlights   optional    A list of short bullet points for extra content.
 //                               e.g. ["Open 6 days a week", "12 villages"]
 //   featured     optional    true to add a "Featured" flag that stands out.
+//
+//   card         optional    Content shown ONLY on the What We Do bento tile.
+//                            Separate from the detail page — edit this to
+//                            change what appears on the grid card without
+//                            affecting project.html.
+//                               {
+//                                 title: "...",       // optional override
+//                                 category: "...",
+//                                 description: "...",
+//                                 stat: "...",
+//                                 highlights: ["..."],
+//                                 image: "./assets/card.jpg",
+//                                 imageSrcset: "...",
+//                                 imageSizes: "...",
+//                                 alt: "...",
+//                                 cta: "Learn more",  // optional button label
+//                               }
+//                            Falls back to the top-level fields if omitted.
 //
 // --------------------------------------------------------------------------
 // DETAIL PAGE FIELDS  (shown when a project tile is clicked → project.html)
@@ -45,66 +70,151 @@
 //                            (each becomes its own paragraph).
 //   gallery      optional    A list of extra photos:
 //                               [{ image: "./assets/a.jpg", alt: "..." }]
+//   workDone     optional    Showcase cards on the project page:
+//                               { heading: "Work we have done", intro: "..." }
+//                               items: [{ title, description, image, alt }]
 //
 // TIP: keep red for the Donate button only — projects use green & blue.
 // --------------------------------------------------------------------------
 
 window.PROJECTS = [
-  {
-    id: "seva",
-    title: "Seva",
-    category: "Relief & Food",
-    description:
-      "Food, clothes, and daily essentials for those in need — including food for 1,500+ people during COVID-19.",
-    detail: [
-      "Seva is our frontline relief programme, providing cooked meals, dry rations, clothing, and daily essentials to families facing hardship.",
-      "During the COVID-19 lockdown, our volunteers reached 1,500+ people who had no other source of support. Today the programme continues year-round, responding quickly wherever help is needed most.",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
-    alt: "Volunteers distributing food and essentials to families",
-    accent: "blue",
-    size: "large",
-    stat: "50,000+ meals served",
-    highlights: [
-      "50,000+ meals distributed to date",
-      "Fed 1,500+ people during COVID-19",
-      "Clothes and daily essentials provided",
-    ],
-    featured: true,
-    stats: [
-      { value: "50,000+", label: "Meals distributed" },
-      { value: "1,500+", label: "People fed during COVID-19" },
-      { value: "365", label: "Days a year active" },
-    ],
-    sections: [
-      {
-        heading: "Why it matters",
-        body: "No one should go to bed hungry. Seva ensures that families in crisis — daily-wage workers, the elderly, and the homeless — have access to nutritious food and basic dignity when they need it most.",
-      },
-      {
-        heading: "How it works",
-        body: [
-          "Volunteers prepare and pack fresh meals every day from community kitchens.",
-          "Dry-ration kits and clothing are distributed directly to families and shelters across the city.",
-          "During emergencies, we scale up rapidly to reach those cut off from other support.",
+    {
+        id: "seva",
+        title: "Seva",
+        category: "Relief & Food",
+        description:
+            "Food, clothes, and daily essentials for those in need — including food for 1,500+ people during COVID-19.",
+        image: "./assets/section/seva-section.jpg",
+        alt: "Volunteers distributing food and essentials to families",
+        accent: "blue",
+        size: "wide",
+        gridPlace: "seva",
+        featured: true,
+        imageFit: "cover",
+        card: {
+            category: "Relief & Food",
+            description:
+                "Food, clothes, and essentials for families in need.",
+            imageFit: "cover",
+            image: "./assets/section/seva-section-card-1200.jpg",
+            imageSrcset:
+                "./assets/section/seva-section-card-600.jpg 600w, ./assets/section/seva-section-card-900.jpg 900w, ./assets/section/seva-section-card-1200.jpg 1200w",
+            imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px",
+            alt: "Volunteers distributing food and essentials to families",
+        },
+        highlights: [
+            "50,000+ meals distributed to date",
+            "Fed 1,500+ people during COVID-19",
+            "Clothes and daily essentials provided",
         ],
-      },
-      {
-        heading: "How you can help",
-        body: "₹350 feeds a family for a week. You can donate, sponsor a community kitchen, or volunteer your time for daily distribution drives.",
-      },
-    ],
+        detail: [
+            "Seva is our frontline relief programme, providing cooked meals, dry rations, clothing, and daily essentials to families facing hardship.",
+            "During the COVID-19 lockdown, our volunteers reached 1,500+ people who had no other source of support. Today the programme continues year-round, responding quickly wherever help is needed most.",
+        ],
+        stats: [
+            {value: "50,000+", label: "Meals distributed"},
+            {value: "1,500+", label: "People fed during COVID-19"},
+            {value: "365", label: "Days a year active"},
+        ],
+        sections: [
+            {
+                heading: "Why it matters",
+                body: "No one should go to bed hungry. Seva ensures that families in crisis — daily-wage workers, the elderly, and the homeless — have access to nutritious food and basic dignity when they need it most.",
+            },
+            {
+                heading: "How it works",
+                body: [
+                    "Volunteers prepare and pack fresh meals every day from community kitchens.",
+                    "Dry-ration kits and clothing are distributed directly to families and shelters across the city.",
+                    "During emergencies, we scale up rapidly to reach those cut off from other support.",
+                ],
+            },
+            {
+                heading: "How you can help",
+                body: "₹350 feeds a family for a week. You can donate, sponsor a community kitchen, or volunteer your time for daily distribution drives.",
+            },
+        ],
+        gallery: [
+            {
+                image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
+                alt: "Meals being packed for distribution",
+            },
+            {
+                image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=80",
+                alt: "Volunteer handing food to a family",
+            },
+        ],
+        workDone: {
+            heading: "Work we have done",
+            intro:
+                "Real relief on the ground — meals, essentials, and emergency support delivered by InAmigos volunteers across communities.",
+            items: [
+                {
+                    title: "Daily meal distribution",
+                    description:
+                        "Fresh cooked meals and dry-ration kits reach families facing food insecurity — over 50,000 meals distributed to date through community kitchens and outreach drives.",
+                    image:
+                        "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80",
+                    alt: "Volunteers packing meals for daily distribution",
+                },
+                {
+                    title: "COVID-19 emergency relief",
+                    description:
+                        "During the lockdown, Seva teams fed 1,500+ people who had no other support — daily-wage workers, the elderly, and families cut off from aid.",
+                    image:
+                        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+                    alt: "Relief supplies prepared during COVID-19 outreach",
+                },
+                {
+                    title: "Clothes & daily essentials",
+                    description:
+                        "Beyond food, Seva provides clothing, hygiene kits, and household essentials so families can rebuild dignity alongside basic needs.",
+                    image:
+                        "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
+                    alt: "Volunteer handing essentials to a family in need",
+                },
+                {
+                    title: "Community kitchen support",
+                    description:
+                        "Local kitchens are supported year-round so nutritious food can be prepared and distributed quickly whenever a neighbourhood needs help.",
+                    image:
+                        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
+                    alt: "Community kitchen preparing food for distribution",
+                },
+            ],
+        },
+    },
+  {
+    id: "udaan",
+    title: "Udaan",
+    category: "Women Empowerment",
+    description:
+      "Empowering women with skills, opportunities, and financial independence through training and mentorship.",
+    image: "./assets/section/udaan-section.jpg",
+    alt: "Women learning new skills together",
+    link: "#",
+    accent: "blue",
+    size: "wide",
+    gridPlace: "udaan",
+    card: {
+      category: "Women Empowerment",
+      description:
+        "Skills training and mentorship that help women and girls build financial independence.",
+      stat: "900+ girls empowered",
+      image: "./assets/section/udaan-section-card-1200.jpg",
+      imageSrcset:
+        "./assets/section/udaan-section-card-600.jpg 600w, ./assets/section/udaan-section-card-900.jpg 900w, ./assets/section/udaan-section-card-1200.jpg 1200w",
+      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px",
+      alt: "Women learning new skills together",
+    },
     gallery: [
       {
-        image:
-          "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80",
-        alt: "Meals being packed for distribution",
+        image: "./assets/udaan-campaign.jpg",
+        alt: "Women learning desktop publishing skills",
       },
       {
-        image:
-          "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&q=80",
-        alt: "Volunteer handing food to a family",
+        image: "./assets/stories/udaan-campaign.jpg",
+        alt: "Mentorship session during Project Udaan",
       },
     ],
   },
@@ -114,111 +224,218 @@ window.PROJECTS = [
     category: "Education",
     description:
       "Education and care for underprivileged children, giving them a brighter start in life.",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da280a25?w=600&q=80",
+    image: "./assets/section/bachpanshala-section.jpg",
     alt: "Underprivileged children learning in a classroom",
     link: "#",
     accent: "green",
     size: "tall",
-  },
-  {
-    id: "jeev",
-    title: "Jeev",
-    category: "Animal Welfare",
-    description: "Supporting and rescuing animals in need of care.",
-    image:
-      "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80",
-    alt: "Rescued dog being cared for by a volunteer",
-    link: "#",
-    accent: "green",
-    size: "small",
-    stat: "50+ animals fed daily",
-  },
-  {
-    id: "udaan",
-    title: "Udaan",
-    category: "Women Empowerment",
-    description:
-      "Empowering women with skills, opportunities, and financial independence.",
-    image: "./assets/udaan-campaign.jpg",
-    alt: "Women learning new skills together",
-    link: "#",
-    accent: "blue",
-    size: "small",
-    stat: "900+ girls empowered",
-  },
-  {
-    id: "prakriti",
-    title: "Prakriti",
-    category: "Environment",
-    description:
-      "Environmental conservation through clean-up drives and plantation.",
-    image: "./assets/praktri.jpg",
-    alt: "Volunteers planting trees during a plantation drive",
-    link: "#",
-    accent: "green",
-    size: "wide",
-    stat: "20,000+ trees planted",
+    gridPlace: "bachpanshala",
+    card: {
+      category: "Education",
+      description:
+        "Classroom learning, meals, and care for underprivileged children.",
+      image: "./assets/section/bachpanshala-section-card-1200.jpg",
+      imageSrcset:
+        "./assets/section/bachpanshala-section-card-600.jpg 600w, ./assets/section/bachpanshala-section-card-900.jpg 900w, ./assets/section/bachpanshala-section-card-1200.jpg 1200w",
+      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+      alt: "Underprivileged children learning in a classroom",
+    },
+    gallery: [
+      {
+        image:
+          "https://images.unsplash.com/photo-1503676260728-1c00da280a25?w=600&q=80",
+        alt: "Children learning together in class",
+      },
+      {
+        image:
+          "https://images.unsplash.com/photo-1497633762263-f141af087744?w=600&q=80",
+        alt: "Books and learning materials for students",
+      },
+    ],
   },
   {
     id: "vikas",
     title: "Vikas",
     category: "Youth & Skills",
     description:
-      "Helping youth grow through internships and hands-on skill-building.",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
+      "Helping youth grow through internships, workshops, and hands-on skill-building.",
+    image: "./assets/section/vikas-section.jpg",
     alt: "Young people collaborating on a project",
     link: "#",
     accent: "blue",
-    size: "wide",
+    size: "tall",
+    gridPlace: "vikas",
+    card: {
+      category: "Youth & Skills",
+      description:
+        "Internships and workshops that prepare young people for work and leadership.",
+      image: "./assets/section/vikas-section-card-1200.jpg",
+      imageSrcset:
+        "./assets/section/vikas-section-card-600.jpg 600w, ./assets/section/vikas-section-card-900.jpg 900w, ./assets/section/vikas-section-card-1200.jpg 1200w",
+      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+      alt: "Young people collaborating on a project",
+    },
+    gallery: [
+      {
+        image:
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
+        alt: "Youth collaborating on a skills project",
+      },
+      {
+        image:
+          "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80",
+        alt: "Interns in a workshop session",
+      },
+    ],
+  },
+  {
+    id: "jeev",
+    title: "Jeev",
+    category: "Animal Welfare",
+    description:
+      "Supporting and rescuing animals in need of care, shelter, and daily feeding.",
+    image: "./assets/section/jeev-section.jpg",
+    alt: "Rescued dog being cared for by a volunteer",
+    link: "#",
+    accent: "green",
+    size: "tall",
+    gridPlace: "jeev",
+    card: {
+      category: "Animal Welfare",
+      description: "Rescue, shelter, and daily care for animals in need.",
+      stat: "50+ animals fed daily",
+      image: "./assets/section/jeev-section-card-1200.jpg",
+      imageSrcset:
+        "./assets/section/jeev-section-card-600.jpg 600w, ./assets/section/jeev-section-card-900.jpg 900w, ./assets/section/jeev-section-card-1200.jpg 1200w",
+      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+      alt: "Rescued dog being cared for by a volunteer",
+    },
+    gallery: [
+      {
+        image:
+          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80",
+        alt: "Rescued dog receiving care",
+      },
+      {
+        image:
+          "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80",
+        alt: "Volunteer feeding a stray animal",
+      },
+    ],
+  },
+  {
+    id: "prakriti",
+    title: "Prakriti",
+    category: "Environment",
+    description:
+      "Environmental conservation through clean-up drives, plantation, and community green spaces.",
+    image: "./assets/section/prakriti-section.jpg",
+    alt: "Volunteers planting trees during a plantation drive",
+    link: "#",
+    accent: "green",
+    size: "tall",
+    gridPlace: "prakriti",
+    card: {
+      category: "Environment",
+      description:
+        "Tree plantation and neighbourhood clean-up drives across the city.",
+      stat: "20,000+ trees planted",
+      image: "./assets/section/prakriti-section-card-1200.jpg",
+      imageSrcset:
+        "./assets/section/prakriti-section-card-600.jpg 600w, ./assets/section/prakriti-section-card-900.jpg 900w, ./assets/section/prakriti-section-card-1200.jpg 1200w",
+      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+      alt: "Volunteers planting trees during a plantation drive",
+    },
+    gallery: [
+      {
+        image: "./assets/praktri.jpg",
+        alt: "Tree plantation drive in progress",
+      },
+      {
+        image:
+          "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80",
+        alt: "Volunteers cleaning a green space",
+      },
+    ],
   },
 
   // ----------------------------------------------------------------------
-  // TEMPLATE — copy this block, remove the // in front of each line,
-  // move it above this comment, and fill in your project.
-  // ----------------------------------------------------------------------
-  // {
-  //   id: "project-name",         // optional clean URL name
-  //   title: "Project Name",
-  //   category: "Short Label",
-  //   description: "One or two sentences shown on the tile.",
-  //   image: "./assets/your-photo.jpg",
-  //   alt: "Describe the photo",
-  //   accent: "green",            // "green" or "blue"
-  //   size: "small",              // "large" | "wide" | "tall" | "small"
-  //   stat: "1,000+ people helped",
-  //   highlights: ["Point one", "Point two", "Point three"],
-  //   featured: false,
-  //
-  //   // ----- Detail page content (project.html) -----
-  //   detail: ["First paragraph.", "Second paragraph."],
-  //   stats: [
-  //     { value: "1,000+", label: "People helped" },
-  //     { value: "12", label: "Villages reached" },
-  //   ],
-  //   sections: [
-  //     { heading: "Why it matters", body: "A short paragraph." },
-  //     { heading: "How it works", body: ["Point one.", "Point two."] },
-  //   ],
-  //   gallery: [
-  //     { image: "./assets/photo-1.jpg", alt: "Describe it" },
-  //     { image: "./assets/photo-2.jpg", alt: "Describe it" },
-  //   ],
-  // },
+    // TEMPLATE — copy this block, remove the // in front of each line,
+    // move it above this comment, and fill in your project.
+    // ----------------------------------------------------------------------
+    // {
+    //   id: "project-name",         // optional clean URL name
+    //   title: "Project Name",
+    //   category: "Short Label",
+    //   description: "One or two sentences shown on the tile.",
+    //   image: "./assets/your-photo.jpg",
+    //   alt: "Describe the photo",
+    //   accent: "green",            // "green" or "blue"
+    //   size: "small",              // "large" | "wide" | "tall" | "small"
+    //   stat: "1,000+ people helped",
+    //   highlights: ["Point one", "Point two", "Point three"],
+    //   featured: false,
+    //
+    //   card: {
+    //     category: "Short Label",
+    //     description: "One or two sentences for the bento tile only.",
+    //     stat: "1,000+ people helped",
+    //     image: "./assets/card-photo.jpg",
+    //     alt: "Describe the card photo",
+    //     cta: "Learn more",
+    //   },
+    //
+    //   // ----- Detail page content (project.html) -----
+    //   detail: ["First paragraph.", "Second paragraph."],
+    //   stats: [
+    //     { value: "1,000+", label: "People helped" },
+    //     { value: "12", label: "Villages reached" },
+    //   ],
+    //   sections: [
+    //     { heading: "Why it matters", body: "A short paragraph." },
+    //     { heading: "How it works", body: ["Point one.", "Point two."] },
+    //   ],
+    //   gallery: [
+    //     { image: "./assets/photo-1.jpg", alt: "Describe it" },
+    //     { image: "./assets/photo-2.jpg", alt: "Describe it" },
+    //   ],
+    //   workDone: {
+    //     heading: "Work we have done",
+    //     intro: "Optional intro sentence.",
+    //     items: [
+    //       {
+    //         title: "Activity name",
+    //         description: "What was done and the impact.",
+    //         image: "./assets/work-photo.jpg",
+    //         alt: "Describe the photo",
+    //       },
+    //     ],
+    //   },
+    // },
 ];
+
+// ==========================================================================
+// PROJECT GALLERY PAGE — gallery.html intro copy
+// ==========================================================================
+
+window.GALLERY_PAGE = {
+    eyebrow: "Project Gallery",
+    heading: "Explore our work by project",
+    intro:
+        "Browse photos from each InAmigos initiative — relief drives, education, empowerment, environment, and more.",
+};
 
 // --------------------------------------------------------------------------
 // Shared helper: turns a project into its URL name (used by the tiles and
 // the project detail page). You don't need to edit this.
 // --------------------------------------------------------------------------
 window.projectSlug = function (project) {
-  if (project && project.id) return String(project.id);
-  return String((project && project.title) || "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    if (project && project.id) return String(project.id);
+    return String((project && project.title) || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 };
 
 // ==========================================================================
@@ -240,41 +457,41 @@ window.projectSlug = function (project) {
 // --------------------------------------------------------------------------
 
 window.STORIES = [
-  {
-    id: "neetu-richa",
-    title: "Neetu & Richa — Udaan Campaign",
-    description:
-      "From uncertainty to opportunity — their story of learning and growth.",
-    image: "./assets/stories/udaan-campaign.jpg",
-    alt: "Neetu and Richa smiling during the Udaan campaign",
-    featured: true,
-    body: [
-      "Neetu and Richa joined our Udaan campaign when access to learning felt out of reach. Through community support and dedicated mentors, they found stability, confidence, and a path forward.",
-      "Today they are not only learning — they are inspiring others in their neighbourhood to believe that opportunity is possible.",
-    ],
-  },
+    {
+        id: "neetu-richa",
+        title: "Neetu & Richa — Udaan Campaign",
+        description:
+            "From uncertainty to opportunity — their story of learning and growth.",
+        image: "./assets/stories/udaan-campaign.jpg",
+        alt: "Neetu and Richa smiling during the Udaan campaign",
+        featured: true,
+        body: [
+            "Neetu and Richa joined our Udaan campaign when access to learning felt out of reach. Through community support and dedicated mentors, they found stability, confidence, and a path forward.",
+            "Today they are not only learning — they are inspiring others in their neighbourhood to believe that opportunity is possible.",
+        ],
+    },
 
-  // ----------------------------------------------------------------------
-  // TEMPLATE — copy, uncomment, fill in, and add above this comment.
-  // ----------------------------------------------------------------------
-  // {
-  //   id: "story-slug",
-  //   title: "Story Title",
-  //   description: "One or two sentences for the card summary.",
-  //   image: "./assets/stories/your-photo.jpg",
-  //   alt: "Describe the photo",
-  //   featured: false,
-  //   body: "Optional longer story text for the detail page.",
-  // },
+    // ----------------------------------------------------------------------
+    // TEMPLATE — copy, uncomment, fill in, and add above this comment.
+    // ----------------------------------------------------------------------
+    // {
+    //   id: "story-slug",
+    //   title: "Story Title",
+    //   description: "One or two sentences for the card summary.",
+    //   image: "./assets/stories/your-photo.jpg",
+    //   alt: "Describe the photo",
+    //   featured: false,
+    //   body: "Optional longer story text for the detail page.",
+    // },
 ];
 
 window.storySlug = function (story) {
-  if (story && story.id) return String(story.id);
-  return String((story && story.title) || "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    if (story && story.id) return String(story.id);
+    return String((story && story.title) || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 };
 
 // ==========================================================================
@@ -289,12 +506,12 @@ window.storySlug = function (story) {
 window.SECTION_NAV = [
     {id: "top", label: "Home"},
     {id: "about", label: "About"},
-    {id: "mission", label: "Mission"},
     {id: "projects", label: "Projects"},
     {id: "impact", label: "Impact"},
     {id: "awards", label: "Awards"},
     {id: "donate-form", label: "Donate"},
     {id: "testimonials", label: "Voices"},
+    {id: "join-community", label: "Community"},
     {id: "faq", label: "FAQ"},
     {id: "contact", label: "Contact"},
 ];
@@ -421,7 +638,8 @@ window.ABOUT = {
             label: "Values",
             tagline: "How we show up",
             body: "The principles that guide every programme, partnership, and rupee spent.",
-            mobileBody: "The principles behind every programme, partnership, and rupee.",
+            mobileBody:
+                "The principles behind every programme, partnership, and rupee.",
             points: [
                 "Transparency — open reporting on every rupee",
                 "Dignity — respect for every life we serve",
@@ -514,9 +732,9 @@ window.AWARDS = [
 
 window.FAQS = [
     {
-      q: "How can I volunteer with InAmigos?",
-      a: "We welcome volunteers for teaching, animal care, plantation drives, relief work, and events. Reach out through the Contact Us section and our team will help you find the right fit.",
-  },
+        q: "How can I volunteer with InAmigos?",
+        a: "We welcome volunteers for teaching, animal care, plantation drives, relief work, and events. Reach out through the Contact Us section and our team will help you find the right fit.",
+    },
     {
         q: "How is my donation used?",
         a: "98% of every donation goes directly to our programmes — food, education, healthcare, and the environment. The remaining 2% covers essential operations. We report openly on how funds are spent.",
@@ -529,8 +747,6 @@ window.FAQS = [
         q: "Can I set up a monthly donation?",
         a: "Absolutely. On the donation card you can choose 'Monthly' to give a recurring amount. You can pause or cancel your monthly giving anytime — no questions asked.",
     },
-    
-    
 
     // ----------------------------------------------------------------------
     // TEMPLATE — copy this block, remove the // in front of each line,
@@ -634,6 +850,73 @@ window.LICENSES = [
 ];
 
 // ==========================================================================
+// SOCIAL MEDIA LINKS
+// ==========================================================================
+//
+// Edit URLs below to point to your official profiles.
+//
+// FIELD GUIDE
+//   platform  (required)  "instagram", "facebook", "linkedin", or "youtube"
+//   label     (required)  Accessible name, e.g. "Instagram"
+//   url       (required)  Full profile URL
+//   handle    optional    Shown in the Contact section, e.g. "@inamigos"
+// --------------------------------------------------------------------------
+
+window.SOCIAL = [
+    {
+        platform: "instagram",
+        label: "Instagram",
+        url: "https://www.instagram.com/inamigos/",
+        handle: "@inamigos",
+    },
+    {
+        platform: "linkedin",
+        label: "LinkedIn",
+        url: "https://www.linkedin.com/company/inamigos-foundation",
+        handle: "InAmigos Foundation",
+    },
+    {
+        platform: "facebook",
+        label: "Facebook",
+        url: "https://www.facebook.com/inamigosfoundation",
+        handle: "InAmigos Foundation",
+    },
+    {
+        platform: "youtube",
+        label: "YouTube",
+        url: "https://www.youtube.com/@inamigosfoundation",
+        handle: "InAmigos Foundation",
+    },
+
+    // {
+    //   platform: "instagram",
+    //   label: "Instagram",
+    //   url: "https://www.instagram.com/your-page/",
+    //   handle: "@yourpage",
+    // },
+];
+
+// ==========================================================================
+// SOCIAL PLACEMENTS — contextual copy for mid-page banners (index.html)
+// ==========================================================================
+//
+// Links come from SOCIAL above. "Join our community" is its own section on
+// index.html after Testimonials. Contact + Footer also list profiles.
+// --------------------------------------------------------------------------
+
+window.SOCIAL_PLACEMENTS = {
+    testimonials: {
+        eyebrow: "Stay connected",
+        title: "Join our community",
+        intro:
+            "Connect with volunteers, interns, and supporters who share stories like these.",
+        hook: "Real voices from the people we serve",
+        ctaLabel: "Join us on social media",
+        seoSchema: true,
+    },
+};
+
+// ==========================================================================
 // TESTIMONIALS CONTENT
 // ==========================================================================
 //
@@ -650,7 +933,12 @@ window.LICENSES = [
 //   video       optional    Link to a video, e.g. YouTube or Instagram URL.
 //   videoLabel  optional    Button text (default: "Watch video").
 //   accent      optional    "green" or "blue" (default: "green").
+//
+// LOAD MORE — first 5 testimonials show; "Load more" appears only when
+// TESTIMONIALS.length is greater than 5.
 // --------------------------------------------------------------------------
+
+window.TESTIMONIALS_INITIAL_COUNT = 5;
 
 window.TESTIMONIALS = [
     {
@@ -685,6 +973,14 @@ window.TESTIMONIALS = [
         videoLabel: "Watch Sagarika's story",
 
         accent: "blue",
+    },
+    {
+        quote: "InAmigos helped me improved writing skills, how to research effectively, importance of meeting deadlines.",
+        name: "Priyanka Bisht",
+        role: "Content Writer Intern",
+        video: "https://youtube.com/shorts/5V8HFwS1dwo?si=dsYZ2nOZgPyP24Ud",
+        videoLabel: "Watch Priyanka's story",
+        accent: "green",
     },
 
     // ----------------------------------------------------------------------

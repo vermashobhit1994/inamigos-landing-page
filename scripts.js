@@ -33,6 +33,14 @@ function renderProjects() {
             .replace(/^-+|-+$/g, "");
         };
 
+  const cardValue = function (project, key) {
+    const card = project.card;
+    if (card && card[key] != null && card[key] !== "") {
+      return card[key];
+    }
+    return project[key];
+  };
+
   grid.innerHTML = projects
     .map(function (project) {
       const accent = project.accent || "green";
@@ -40,12 +48,30 @@ function renderProjects() {
         allowedSizes.indexOf(project.size) !== -1 ? project.size : "small";
       const featuredClass = project.featured ? " is-featured" : "";
       const href = "project.html?p=" + encodeURIComponent(slugify(project));
+      const cardTitle = cardValue(project, "title") || project.title;
+      const cardCategory = cardValue(project, "category");
+      const cardDescription = cardValue(project, "description");
+      const cardStat = cardValue(project, "stat");
+      const cardHighlights = cardValue(project, "highlights");
+      const cardImage = cardValue(project, "image");
+      const cardImageSrcset = cardValue(project, "imageSrcset");
+      const cardImageSizes = cardValue(project, "imageSizes");
+      const cardAlt = cardValue(project, "alt") || cardTitle;
+      const cardCta = cardValue(project, "cta") || "Learn more";
+      const cardImageFit = cardValue(project, "imageFit");
+      const imageFit = cardImageFit || project.imageFit;
+      const layoutClass = project.layout === "split" ? " bento-tile--split" : "";
+      const placeClass = project.gridPlace
+        ? " bento-tile--place-" + escapeHtml(project.gridPlace)
+        : "";
+      const fitClass =
+        imageFit === "cover" ? "" : " bento-tile--fit-contain";
 
       const topRow =
         '<div class="bento-tile__top">' +
-        (project.category
+        (cardCategory
           ? '<span class="bento-tile__badge">' +
-            escapeHtml(project.category) +
+            escapeHtml(cardCategory) +
             "</span>"
           : "") +
         (project.featured
@@ -53,14 +79,14 @@ function renderProjects() {
           : "") +
         "</div>";
 
-      const statChip = project.stat
-        ? '<span class="bento-tile__stat">' + escapeHtml(project.stat) + "</span>"
+      const statChip = cardStat
+        ? '<span class="bento-tile__stat">' + escapeHtml(cardStat) + "</span>"
         : "";
 
       const highlights =
-        Array.isArray(project.highlights) && project.highlights.length
+        Array.isArray(cardHighlights) && cardHighlights.length
           ? '<ul class="bento-tile__points">' +
-            project.highlights
+            cardHighlights
               .map(function (point) {
                 return "<li>" + escapeHtml(point) + "</li>";
               })
@@ -70,42 +96,56 @@ function renderProjects() {
 
       const ctaAccent = accent === "blue" ? "blue" : "green";
 
+      const imgAttrs =
+        'class="bento-tile__img" src="' +
+        escapeHtml(cardImage) +
+        '" alt="' +
+        escapeHtml(cardAlt) +
+        '" loading="lazy"' +
+        (cardImageSrcset
+          ? ' srcset="' + escapeHtml(cardImageSrcset) + '"'
+          : "") +
+        (cardImageSizes
+          ? ' sizes="' + escapeHtml(cardImageSizes) + '"'
+          : "") +
+        " />";
+
       return (
         '<article class="bento-tile bento-tile--' +
         size +
         " bento-tile--" +
         escapeHtml(accent) +
         featuredClass +
+        layoutClass +
+        placeClass +
+        fitClass +
         '" role="listitem">' +
         '<a class="bento-tile__cover" href="' +
         escapeHtml(href) +
         '">' +
-        '<img class="bento-tile__img" src="' +
-        escapeHtml(project.image) +
-        '" alt="' +
-        escapeHtml(project.alt || project.title) +
-        '" loading="lazy" />' +
+        "<img " +
+        imgAttrs +
         '<div class="bento-tile__overlay">' +
         topRow +
         '<div class="bento-tile__content">' +
         "<h3>" +
-        escapeHtml(project.title) +
+        escapeHtml(cardTitle) +
         "</h3>" +
         "<p>" +
-        escapeHtml(project.description) +
+        escapeHtml(cardDescription) +
         "</p>" +
         highlights +
         statChip +
         '<span class="bento-tile__cta bento-tile__cta--' +
         escapeHtml(ctaAccent) +
         '">' +
-        "Learn more" +
+        escapeHtml(cardCta) +
         '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
         '<path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" ' +
         'stroke-linecap="round" stroke-linejoin="round"/>' +
         "</svg>" +
         '<span class="visually-hidden"> about ' +
-        escapeHtml(project.title) +
+        escapeHtml(cardTitle) +
         "</span>" +
         "</span>" +
         "</div>" +
@@ -260,6 +300,107 @@ function renderFaqs() {
   });
 }
 
+function getTestimonialsInitialCount() {
+  return typeof window.TESTIMONIALS_INITIAL_COUNT === "number"
+    ? window.TESTIMONIALS_INITIAL_COUNT
+    : 5;
+}
+
+function renderTestimonialCard(item, index, escapeHtml, getInitials) {
+  const accent = item.accent === "blue" ? "blue" : "green";
+  const hasVideo = Boolean(item.video);
+  const initialCount = getTestimonialsInitialCount();
+  const isDeferred = index >= initialCount;
+
+  const avatar = item.avatar
+    ? '<img class="testimonial-card__avatar" src="' +
+      escapeHtml(item.avatar) +
+      '" alt="' +
+      escapeHtml(item.name || "") +
+      '" loading="lazy" width="48" height="48" />'
+    : '<span class="testimonial-card__avatar testimonial-card__avatar--initials" aria-hidden="true">' +
+      escapeHtml(getInitials(item.name || "")) +
+      "</span>";
+
+  const videoHtml = item.video
+    ? '<a href="' +
+      escapeHtml(item.video) +
+      '" class="testimonial-card__video" target="_blank" rel="noopener noreferrer">' +
+      '<span class="testimonial-card__video-icon" aria-hidden="true">▶</span>' +
+      escapeHtml(item.videoLabel || "Watch video") +
+      "</a>"
+    : "";
+
+  return (
+    '<figure class="testimonial-card testimonial-card--' +
+    accent +
+    (hasVideo ? " testimonial-card--has-video" : "") +
+    (isDeferred ? " testimonial-card--deferred" : "") +
+    '" role="listitem"' +
+    (isDeferred ? ' hidden aria-hidden="true"' : "") +
+    ' itemscope itemtype="https://schema.org/Review">' +
+    '<meta itemprop="itemReviewed" content="InAmigos Foundation" />' +
+    '<span class="testimonial-card__mark" aria-hidden="true">&ldquo;</span>' +
+    '<blockquote class="testimonial-card__quote" itemprop="reviewBody" cite="https://inamigosfoundation.org.in">' +
+    escapeHtml(item.quote || "") +
+    "</blockquote>" +
+    videoHtml +
+    '<figcaption class="testimonial-card__person" itemprop="author" itemscope itemtype="https://schema.org/Person">' +
+    avatar +
+    '<span class="testimonial-card__meta">' +
+    '<span class="testimonial-card__name" itemprop="name">' +
+    escapeHtml(item.name || "") +
+    "</span>" +
+    (item.role
+      ? '<span class="testimonial-card__role">' +
+        escapeHtml(item.role) +
+        "</span>"
+      : "") +
+    "</span>" +
+    "</figcaption>" +
+    "</figure>"
+  );
+}
+
+function initTestimonialsLoadMore(items) {
+  const section = document.getElementById("testimonials");
+  const actions = document.getElementById("testimonials-actions");
+  let button = document.getElementById("testimonials-load-more");
+  const grid = document.getElementById("testimonials-grid");
+  if (!actions || !button || !grid) return;
+
+  const totalCount = items.length;
+  const initialCount = getTestimonialsInitialCount();
+
+  actions.hidden = true;
+  button.setAttribute("aria-expanded", "false");
+
+  if (totalCount <= initialCount) {
+    return;
+  }
+
+  const hiddenCount = totalCount - initialCount;
+  actions.hidden = false;
+  button.textContent =
+    "Load more voices (" + String(hiddenCount) + " more)";
+
+  const freshButton = button.cloneNode(true);
+  button.replaceWith(freshButton);
+  button = freshButton;
+
+  button.addEventListener("click", function () {
+    grid.querySelectorAll(".testimonial-card--deferred").forEach(function (card) {
+      card.hidden = false;
+      card.removeAttribute("aria-hidden");
+      card.classList.remove("testimonial-card--deferred");
+    });
+
+    if (section) section.classList.add("testimonials--expanded");
+    actions.hidden = true;
+    button.setAttribute("aria-expanded", "true");
+  });
+}
+
 function renderTestimonials() {
   const grid = document.getElementById("testimonials-grid");
   if (!grid) return;
@@ -286,55 +427,12 @@ function renderTestimonials() {
   };
 
   grid.innerHTML = items
-    .map(function (item) {
-      const accent = item.accent === "blue" ? "blue" : "green";
-      const hasVideo = Boolean(item.video);
-      const avatar = item.avatar
-        ? '<img class="testimonial-card__avatar" src="' +
-          escapeHtml(item.avatar) +
-          '" alt="' +
-          escapeHtml(item.name || "") +
-          '" loading="lazy" />'
-        : '<span class="testimonial-card__avatar testimonial-card__avatar--initials" aria-hidden="true">' +
-          escapeHtml(getInitials(item.name || "")) +
-          "</span>";
-
-      const videoHtml = item.video
-        ? '<a href="' +
-          escapeHtml(item.video) +
-          '" class="testimonial-card__video" target="_blank" rel="noopener noreferrer">' +
-          '<span class="testimonial-card__video-icon" aria-hidden="true">▶</span>' +
-          escapeHtml(item.videoLabel || "Watch video") +
-          "</a>"
-        : "";
-
-      return (
-        '<figure class="testimonial-card testimonial-card--' +
-        accent +
-        (hasVideo ? " testimonial-card--has-video" : "") +
-        '">' +
-        '<span class="testimonial-card__mark" aria-hidden="true">&ldquo;</span>' +
-        '<blockquote class="testimonial-card__quote">' +
-        escapeHtml(item.quote || "") +
-        "</blockquote>" +
-        videoHtml +
-        '<figcaption class="testimonial-card__person">' +
-        avatar +
-        '<span class="testimonial-card__meta">' +
-        '<span class="testimonial-card__name">' +
-        escapeHtml(item.name || "") +
-        "</span>" +
-        (item.role
-          ? '<span class="testimonial-card__role">' +
-            escapeHtml(item.role) +
-            "</span>"
-          : "") +
-        "</span>" +
-        "</figcaption>" +
-        "</figure>"
-      );
+    .map(function (item, index) {
+      return renderTestimonialCard(item, index, escapeHtml, getInitials);
     })
     .join("");
+
+  initTestimonialsLoadMore(items);
 }
 
 function renderStoriesSpotlight() {
@@ -670,6 +768,241 @@ function renderJourney() {
       : "");
 }
 
+const socialIconSvg = {
+  instagram:
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+    '<rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>' +
+    '<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>' +
+    '<circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+  facebook:
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+    '<path d="M14 8.5V7.2c0-.7.5-1.2 1.2-1.2H17V3h-2.4C12.1 3 11 4.8 11 7v1.5H9v3h2V21h3v-10.5h2.6L17 8.5h-3z"/></svg>',
+  linkedin:
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+    '<path d="M6.5 9.5V21h-3V9.5h3zM5 3.5a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM9 9.5h2.9v1.6h.04c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V21h-3v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9V9.5z"/></svg>',
+  youtube:
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+    '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C17.8 5 12 5 12 5s-5.8 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8c2 .4 7.8.4 7.8.4s5.8 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.5V8.5l5.5 3.5L10 15.5z"/></svg>',
+};
+
+function buildSocialLinksHtml(options) {
+  const social = Array.isArray(window.SOCIAL) ? window.SOCIAL : [];
+  if (!social.length) return "";
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  const opts = options || {};
+  const modifier = opts.modifier ? " social-links--" + opts.modifier : "";
+  const showHandles = Boolean(opts.showHandles);
+  const iconOnly = Boolean(opts.iconOnly);
+  const seo = Boolean(opts.seo);
+  const rel = seo ? "me noopener noreferrer" : "noopener noreferrer";
+
+  const items = social
+    .map(function (item) {
+      const platform = String(item.platform || "link").toLowerCase();
+      const icon = socialIconSvg[platform] || socialIconSvg.instagram;
+      const label = item.label || platform;
+      const handle = item.handle ? " (" + item.handle + ")" : "";
+      const linkLabel = "Follow InAmigos Foundation on " + label + handle;
+
+      if (iconOnly) {
+        return (
+          '<li class="social-links__item">' +
+          '<a class="social-links__link social-links__link--' +
+          escapeHtml(platform) +
+          '" href="' +
+          escapeHtml(item.url) +
+          '" target="_blank" rel="' +
+          rel +
+          '"' +
+          ' title="' +
+          escapeHtml(linkLabel) +
+          '"' +
+          ' aria-label="' +
+          escapeHtml(linkLabel) +
+          '">' +
+          icon +
+          '<span class="visually-hidden">' +
+          escapeHtml(linkLabel) +
+          "</span>" +
+          "</a>" +
+          "</li>"
+        );
+      }
+
+      return (
+        '<li class="social-links__item">' +
+        '<a class="social-links__link social-links__link--' +
+        escapeHtml(platform) +
+        '" href="' +
+        escapeHtml(item.url) +
+        '" target="_blank" rel="' +
+        rel +
+        '"' +
+        (seo
+          ? ' title="' +
+            escapeHtml(linkLabel) +
+            '" aria-label="' +
+            escapeHtml(linkLabel) +
+            '"'
+          : "") +
+        ">" +
+        icon +
+        "<span>" +
+        escapeHtml(label) +
+        (showHandles && item.handle
+          ? '<span class="social-links__handle">' +
+            escapeHtml(item.handle) +
+            "</span>"
+          : "") +
+        "</span>" +
+        "</a>" +
+        "</li>"
+      );
+    })
+    .join("");
+
+  if (iconOnly) {
+    return (
+      '<nav class="social-banner__nav" aria-label="InAmigos social media profiles">' +
+      '<ul class="social-links social-links--banner" role="list">' +
+      items +
+      "</ul></nav>"
+    );
+  }
+
+  return (
+    (opts.heading
+      ? '<h3 class="social-links__heading">' + escapeHtml(opts.heading) + "</h3>"
+      : "") +
+    '<ul class="social-links' +
+    modifier +
+    '" role="list">' +
+    items +
+    "</ul>"
+  );
+}
+
+function renderFooterSocial() {
+  const mount = document.getElementById("footer-social");
+  if (!mount) return;
+
+  const html = buildSocialLinksHtml({
+    modifier: "footer",
+    heading: "Follow us",
+    seo: true,
+  });
+
+  if (html) mount.innerHTML = html;
+}
+
+function renderSocialBanner(placementKey, mountId) {
+  const mount = document.getElementById(mountId);
+  if (!mount) return;
+
+  const placements = window.SOCIAL_PLACEMENTS || {};
+  const config = placements[placementKey];
+  if (!config) return;
+
+  const navHtml = buildSocialLinksHtml({ iconOnly: true, seo: true });
+  if (!navHtml) return;
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  const titleId = mountId + "-title";
+  const title = config.title || "Follow us";
+
+  let schemaHtml = "";
+  if (config.seoSchema) {
+    const social = Array.isArray(window.SOCIAL) ? window.SOCIAL : [];
+    schemaHtml =
+      social
+        .map(function (item) {
+          return (
+            '<link itemprop="sameAs" href="' + escapeHtml(item.url) + '" />'
+          );
+        })
+        .join("") +
+      '<meta itemprop="name" content="InAmigos Foundation" />' +
+      '<link itemprop="url" href="https://inamigosfoundation.org.in" />';
+  }
+
+  const isFeatured = Boolean(
+    config.eyebrow || config.hook || config.ctaLabel
+  );
+
+  const copyHtml =
+    '<div class="social-banner__copy">' +
+    (isFeatured && config.eyebrow
+      ? '<p class="social-section__eyebrow">' +
+        escapeHtml(config.eyebrow) +
+        "</p>"
+      : "") +
+    '<h2 id="' +
+    titleId +
+    '" class="social-banner__title' +
+    (isFeatured ? " social-banner__title--featured" : "") +
+    '">' +
+    escapeHtml(title) +
+    "</h2>" +
+    (config.intro
+      ? '<p class="social-banner__intro">' + escapeHtml(config.intro) + "</p>"
+      : "") +
+    (isFeatured && config.hook
+      ? '<p class="social-section__hook">' + escapeHtml(config.hook) + "</p>"
+      : "") +
+    "</div>";
+
+  const ctaLabelHtml =
+    isFeatured && config.ctaLabel
+      ? '<p class="social-section__cta-label">' +
+        escapeHtml(config.ctaLabel) +
+        "</p>"
+      : "";
+
+  if (isFeatured) {
+    mount.innerHTML =
+      '<div class="social-banner social-banner--featured"' +
+      (config.seoSchema ? ' itemscope itemtype="https://schema.org/NGO"' : "") +
+      ">" +
+      '<div class="social-banner__shine" aria-hidden="true"></div>' +
+      '<div class="social-banner__inner">' +
+      schemaHtml +
+      copyHtml +
+      ctaLabelHtml +
+      navHtml +
+      "</div></div>";
+  } else {
+    mount.innerHTML =
+      '<div class="social-banner__inner"' +
+      (config.seoSchema ? ' itemscope itemtype="https://schema.org/NGO"' : "") +
+      ">" +
+      schemaHtml +
+      copyHtml +
+      navHtml +
+      "</div>";
+  }
+
+  mount.setAttribute("aria-labelledby", titleId);
+}
+
+function renderSocialPlacements() {
+  renderSocialBanner("testimonials", "testimonials-social");
+}
+
 function renderContact() {
   const mount = document.getElementById("contact-content");
   if (!mount) return;
@@ -788,6 +1121,21 @@ function renderContact() {
         "</a></p>" +
         "</div>"
       : "") +
+    (function () {
+      const socialHtml = buildSocialLinksHtml({
+        modifier: "contact",
+        heading: "Follow us",
+        showHandles: true,
+        seo: true,
+      });
+      if (!socialHtml) return "";
+      return (
+        '<div class="contact__card contact__card--social">' +
+        '<span class="contact__card-icon" aria-hidden="true">&#128172;</span>' +
+        socialHtml +
+        "</div>"
+      );
+    })() +
     "</div>" +
     '<div class="contact__licenses" id="licenses">' +
     '<header class="contact__licenses-header">' +
@@ -1036,6 +1384,23 @@ function safeRender(name, fn) {
   }
 }
 
+function initSkipLink() {
+  const skipLink = document.querySelector(".skip-link");
+  if (!skipLink) return;
+
+  skipLink.addEventListener("click", function () {
+    const target = document.getElementById("main-content");
+    if (target) {
+      if (!target.hasAttribute("tabindex")) {
+        target.setAttribute("tabindex", "-1");
+      }
+      target.focus({ preventScroll: true });
+    }
+
+    skipLink.blur();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   safeRender("projects", renderProjects);
   safeRender("about", renderAbout);
@@ -1047,7 +1412,10 @@ document.addEventListener("DOMContentLoaded", function () {
   safeRender("testimonials", renderTestimonials);
   safeRender("faqs", renderFaqs);
 
+  renderFooterSocial();
+  renderSocialPlacements();
   initInPageAnchorLinks();
+  initSkipLink();
 
   if (window.location.hash.length > 1) {
     const hashId = decodeURIComponent(window.location.hash.slice(1));

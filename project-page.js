@@ -116,6 +116,59 @@
           .join("")
       : "";
 
+  // ---- Work done showcase ----
+  const workDoneConfig = project.workDone || {};
+  const workItems = Array.isArray(workDoneConfig.items)
+    ? workDoneConfig.items
+    : Array.isArray(project.workDone)
+      ? project.workDone
+      : [];
+
+  const workDoneHtml = workItems.length
+    ? '<section class="section project-work project-work--' +
+      accent +
+      '">' +
+      '<div class="container">' +
+      '<header class="section__header section__header--center project-work__header">' +
+      '<p class="eyebrow">Our impact</p>' +
+      "<h2>" +
+      escapeHtml(workDoneConfig.heading || "Work we have done") +
+      "</h2>" +
+      (workDoneConfig.intro
+        ? '<p class="section__intro">' +
+          escapeHtml(workDoneConfig.intro) +
+          "</p>"
+        : "") +
+      "</header>" +
+      '<div class="project-work__grid">' +
+      workItems
+        .map(function (item) {
+          return (
+            '<article class="project-work__card">' +
+            '<div class="project-work__media">' +
+            '<img src="' +
+            escapeHtml(item.image) +
+            '" alt="' +
+            escapeHtml(item.alt || item.title || "") +
+            '" loading="lazy" />' +
+            "</div>" +
+            '<div class="project-work__body">' +
+            "<h3>" +
+            escapeHtml(item.title || "") +
+            "</h3>" +
+            "<p>" +
+            escapeHtml(item.description || "") +
+            "</p>" +
+            "</div>" +
+            "</article>"
+          );
+        })
+        .join("") +
+      "</div>" +
+      "</div>" +
+      "</section>"
+    : "";
+
   // ---- Gallery ----
   const galleryHtml =
     Array.isArray(project.gallery) && project.gallery.length
@@ -269,6 +322,7 @@
     aside +
     "</div>" +
     "</section>" +
+    workDoneHtml +
     relatedHtml +
     '<div class="project-actions-bar" role="navigation" aria-label="Project actions">' +
     '<a class="btn btn--pill btn--outline project-actions-bar__back project-actions-bar__back--' +

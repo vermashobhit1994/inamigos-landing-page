@@ -69,18 +69,11 @@
                 <div class="nav__right">
                     <ul class="nav__links">
                         <li><a href="#projects">Projects</a></li>
-                        <li>
-                            <a href="#events">Events </a>
-                        </li>
-                        <li>
-                            <a href="#events">Initiatives </a>
-                        </li>
-                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#impact">Impact</a></li>
                         <li><a href="#awards">Awards</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#blog">Blog</a></li>
                         <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#mission">Mission</a></li>
                     </ul>
                     <a href="#donate-form" class="btn btn--pill btn--red"
                         >Donate</a
@@ -102,14 +95,12 @@
             <div class="mobile-menu" id="mobile-menu" hidden>
                 <ul class="mobile-menu__links">
                     <li><a href="#projects">Projects</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#events">Events &amp; Initiatives</a></li>
-                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#impact">Impact</a></li>
                     <li><a href="#awards">Awards &amp; Achievements</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#blog">Blog</a></li>
                     <li><a href="#contact">Contact Us</a></li>
-                    <li><a href="#mission">Mission</a></li>
                 </ul>
                 <a
                     href="#donate-form"
@@ -143,11 +134,13 @@
                             Every act of kindness matters
                         </p>
                         <h1 id="hero-heading">
-                            <span class="hero__heading-line"
+                            <span
+                                class="hero__heading-line hero__heading-line--action"
                                 >Small action</span
                             >
                             <span class="hero__heading-accent">
-                                <span class="hero__heading-accent-inner"
+                                <span
+                                    class="hero__heading-accent-inner hero__heading-accent-inner--impact"
                                     >big impact</span
                                 >
                             </span>
@@ -218,7 +211,7 @@
                                     ./assets/hero/hero-1200.webp 1200w,
                                     ./assets/hero/hero-1536.webp 1536w
                                 "
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 52vw, 680px"
                             />
                             <source
                                 type="image/jpeg"
@@ -230,7 +223,7 @@
                                     ./assets/hero/hero-1200.jpg 1200w,
                                     ./assets/hero/hero-1536.jpg 1536w
                                 "
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 52vw, 680px"
                             />
                             <img
                                 src="./assets/hero/hero-768.jpg"
@@ -242,7 +235,7 @@
                                     ./assets/hero/hero-1200.jpg 1200w,
                                     ./assets/hero/hero-1536.jpg 1536w
                                 "
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 52vw, 680px"
                                 alt="InAmigos impact collage — communities, children, meals, trees, and animals helped through kindness."
                                 class="hero__photo"
                                 width="1536"
@@ -282,6 +275,9 @@
                             at the center — addressing real needs with
                             measurable, lasting outcomes.
                         </p>
+                        <a href="gallery.html" class="link-arrow"
+                            >Browse project gallery</a
+                        >
                     </header>
 
                     <!--
@@ -339,9 +335,19 @@
                 aria-labelledby="impact-heading"
             >
                 <div class="container">
-                    <h2 id="impact-heading" class="visually-hidden">
-                        Our Impact
-                    </h2>
+                    <header
+                        class="section__header section__header--center stats-bar__header"
+                    >
+                        <p class="eyebrow">Our Impact</p>
+                        <h2 id="impact-heading">
+                            Numbers that reflect real change
+                        </h2>
+                        <p class="section__intro">
+                            From meals served to girls empowered — every figure
+                            represents lives touched through community action
+                            and your generosity.
+                        </p>
+                    </header>
                     <div class="stats-bar__grid" role="list">
                         <div
                             class="stats-bar__item stats-bar__item--green"
@@ -725,7 +731,45 @@
                     <div
                         class="testimonials__grid"
                         id="testimonials-grid"
+                        role="list"
+                        aria-live="polite"
                     ></div>
+                    <div
+                        class="testimonials__actions"
+                        id="testimonials-actions"
+                        hidden
+                    >
+                        <button
+                            type="button"
+                            class="btn btn--pill btn--green testimonials__load-more"
+                            id="testimonials-load-more"
+                            aria-expanded="false"
+                            aria-controls="testimonials-grid"
+                        >
+                            Load more voices
+                        </button>
+                    </div>
+                    <noscript>
+                        <style>
+                            .testimonial-card[hidden] {
+                                display: flex !important;
+                            }
+                            #testimonials-actions {
+                                display: none !important;
+                            }
+                        </style>
+                    </noscript>
+                </div>
+            </section>
+
+            <!-- Join our community — social (projects-data.js SOCIAL_PLACEMENTS.testimonials) -->
+            <section
+                id="join-community"
+                class="section social-section"
+                aria-labelledby="testimonials-social-title"
+            >
+                <div class="container">
+                    <div id="testimonials-social"></div>
                 </div>
             </section>
 
@@ -787,12 +831,14 @@
                             >NGO DARPAN Registered</a
                         >.
                     </p>
+                    <div id="footer-social" class="footer__social"></div>
                 </div>
                 <div class="footer__links">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="#about">About</a></li>
                         <li><a href="#projects">Our Work</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="#impact">Impact</a></li>
                         <li><a href="#donate-form">Donate</a></li>
                         <li><a href="#licenses">Licenses</a></li>
