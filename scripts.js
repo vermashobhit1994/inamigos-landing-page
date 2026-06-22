@@ -433,9 +433,166 @@ function renderAbout() {
     "</div>";
 }
 
+function initSectionBreadcrumbs() {
+  const list = document.getElementById("section-breadcrumbs-list");
+  const scrollWrap = document.querySelector(".section-breadcrumbs__scroll");
+  if (!list || !scrollWrap) return;
+
+  const items = Array.isArray(window.SECTION_NAV) ? window.SECTION_NAV : [];
+  if (!items.length) return;
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  let html = "";
+  items.forEach(function (item, index) {
+    if (index === 1) {
+      html +=
+        '<li class="section-breadcrumbs__sep" aria-hidden="true">›</li>';
+    }
+    const href = item.id === "top" ? "#" : "#" + escapeHtml(item.id);
+    html +=
+      '<li class="section-breadcrumbs__item">' +
+      '<a href="' +
+      href +
+      '" class="section-breadcrumbs__link" data-section-id="' +
+      escapeHtml(item.id) +
+      '">' +
+      escapeHtml(item.label || "") +
+      "</a></li>";
+  });
+  list.innerHTML = html;
+
+  const links = list.querySelectorAll(".section-breadcrumbs__link");
+  const linkById = {};
+  links.forEach(function (link) {
+    linkById[link.getAttribute("data-section-id")] = link;
+  });
+
+  const targets = items
+    .map(function (item) {
+      if (item.id === "top") {
+        return {
+          id: "top",
+          el: document.querySelector(".hero") || document.body,
+        };
+      }
+      return { id: item.id, el: document.getElementById(item.id) };
+    })
+    .filter(function (target) {
+      return target.el;
+    });
+
+  if (!targets.length) return;
+
+  const setActive = function (sectionId) {
+    links.forEach(function (link) {
+      const isActive = link.getAttribute("data-section-id") === sectionId;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+
+    const activeLink = linkById[sectionId];
+    if (activeLink && scrollWrap) {
+      const linkLeft = activeLink.offsetLeft;
+      const linkWidth = activeLink.offsetWidth;
+      const wrapWidth = scrollWrap.clientWidth;
+      const scrollLeft = linkLeft - wrapWidth / 2 + linkWidth / 2;
+      scrollWrap.scrollTo({ left: scrollLeft, behavior: "smooth" });
+    }
+  };
+
+  links.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      const id = link.getAttribute("data-section-id");
+      if (id === "top") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setActive("top");
+      }
+
+      const menuBtn = document.querySelector(".nav__menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      if (
+        menuBtn &&
+        mobileMenu &&
+        menuBtn.getAttribute("aria-expanded") === "true"
+      ) {
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.classList.remove("is-open");
+        mobileMenu.hidden = true;
+      }
+    });
+  });
+
+  const headerOffset =
+    parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--header-offset"
+      ),
+      10
+    ) || 116;
+
+  const visibleSections = new Map();
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        const id = entry.target.getAttribute("data-breadcrumb-id");
+        if (!id) return;
+        if (entry.isIntersecting) {
+          visibleSections.set(id, entry.intersectionRatio);
+        } else {
+          visibleSections.delete(id);
+        }
+      });
+
+      if (window.scrollY < 48) {
+        setActive("top");
+        return;
+      }
+
+      if (!visibleSections.size) return;
+
+      let bestId = null;
+      let bestRatio = -1;
+      visibleSections.forEach(function (ratio, id) {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
+        }
+      });
+
+      if (bestId) setActive(bestId);
+    },
+    {
+      root: null,
+      rootMargin: "-" + headerOffset + "px 0px -50% 0px",
+      threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
+    }
+  );
+
+  targets.forEach(function (target) {
+    target.el.setAttribute("data-breadcrumb-id", target.id);
+    observer.observe(target.el);
+  });
+
+  setActive(window.scrollY < 48 ? "top" : targets[0].id);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   renderProjects();
   renderAbout();
+  initSectionBreadcrumbs();
   renderAwards();
   renderTestimonials();
   renderFaqs();

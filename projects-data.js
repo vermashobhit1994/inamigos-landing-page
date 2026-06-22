@@ -222,6 +222,27 @@ window.projectSlug = function (project) {
 };
 
 // ==========================================================================
+// MOBILE SECTION NAV — breadcrumbs on index.html (max-width: 900px)
+// ==========================================================================
+//
+// Edit this list to change which sections appear in the sticky mobile bar.
+//   id      must match a section id on the page (or "top" for home/hero)
+//   label   short text shown in the breadcrumb pill
+// --------------------------------------------------------------------------
+
+window.SECTION_NAV = [
+  { id: "top", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "mission", label: "Mission" },
+  { id: "projects", label: "Projects" },
+  { id: "impact", label: "Impact" },
+  { id: "awards", label: "Awards" },
+  { id: "get-involved", label: "Donate" },
+  { id: "testimonials", label: "Voices" },
+  { id: "faq", label: "FAQ" },
+];
+
+// ==========================================================================
 // WHO WE ARE — Mission, Vision & Values (index.html #about)
 // ==========================================================================
 //
