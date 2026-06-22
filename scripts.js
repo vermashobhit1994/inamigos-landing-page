@@ -9,6 +9,7 @@
 
 function renderProjects() {
   const grid = document.getElementById("projects-grid");
+  const jumpNav = document.getElementById("projects-jump");
   if (!grid) return;
 
   const projects = Array.isArray(window.PROJECTS) ? window.PROJECTS : [];
@@ -32,6 +33,10 @@ function renderProjects() {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "");
         };
+
+  const projectAnchorId = function (project) {
+    return "project-" + (project.gridPlace || slugify(project));
+  };
 
   const cardValue = function (project, key) {
     const card = project.card;
@@ -119,7 +124,9 @@ function renderProjects() {
         layoutClass +
         placeClass +
         fitClass +
-        '" role="listitem">' +
+        '" id="' +
+        escapeHtml(projectAnchorId(project)) +
+        '" tabindex="-1" role="listitem">' +
         '<a class="bento-tile__cover" href="' +
         escapeHtml(href) +
         '">' +
@@ -129,9 +136,11 @@ function renderProjects() {
         topRow +
         '<div class="bento-tile__content">' +
         "<h3>" +
+        '<span class="bento-tile__title">' +
         escapeHtml(cardTitle) +
+        "</span>" +
         "</h3>" +
-        "<p>" +
+        '<p class="bento-tile__desc">' +
         escapeHtml(cardDescription) +
         "</p>" +
         highlights +
@@ -155,6 +164,142 @@ function renderProjects() {
       );
     })
     .join("");
+
+  if (jumpNav && projects.length) {
+    jumpNav.innerHTML =
+      '<div class="projects__jump-head">' +
+      '<p class="projects__jump-label">Jump to a project</p>' +
+      '<p class="projects__jump-hint">Tap a programme to scroll straight to its card</p>' +
+      "</div>" +
+      '<div class="projects__jump-wrap">' +
+      '<ul class="projects__jump-list" role="list">' +
+      projects
+        .map(function (project) {
+          const accent = project.accent || "green";
+          const anchorId = projectAnchorId(project);
+          const cardTitle = cardValue(project, "title") || project.title;
+          const cardCategory = cardValue(project, "category");
+          const featuredMark = project.featured
+            ? " projects__jump-link--featured"
+            : "";
+
+          return (
+            '<li class="projects__jump-item" role="listitem">' +
+            '<a class="projects__jump-link projects__jump-link--' +
+            escapeHtml(accent) +
+            featuredMark +
+            '" href="#' +
+            escapeHtml(anchorId) +
+            '" data-project="' +
+            escapeHtml(project.gridPlace || slugify(project)) +
+            '">' +
+            '<span class="projects__jump-name">' +
+            escapeHtml(cardTitle) +
+            "</span>" +
+            (cardCategory
+              ? '<span class="projects__jump-cat">' +
+                escapeHtml(cardCategory) +
+                "</span>"
+              : "") +
+            "</a>" +
+            "</li>"
+          );
+        })
+        .join("") +
+      "</ul>" +
+      "</div>";
+
+    initProjectJumpNav(jumpNav, projects, projectAnchorId);
+  } else if (jumpNav) {
+    jumpNav.hidden = true;
+  }
+}
+
+function flashProjectTile(tile) {
+  if (!tile) return;
+  tile.classList.remove("project-jump-flash");
+  void tile.offsetWidth;
+  tile.classList.add("project-jump-flash");
+  tile.addEventListener(
+    "animationend",
+    function onEnd() {
+      tile.classList.remove("project-jump-flash");
+      tile.removeEventListener("animationend", onEnd);
+    },
+    { once: true }
+  );
+}
+
+function initProjectJumpNav(nav, projects, projectAnchorId) {
+  const links = nav.querySelectorAll(".projects__jump-link");
+  const tiles = projects
+    .map(function (project) {
+      return document.getElementById(projectAnchorId(project));
+    })
+    .filter(Boolean);
+
+  nav.addEventListener("click", function (event) {
+    const link = event.target.closest(".projects__jump-link");
+    if (!link) return;
+
+    const hash = link.getAttribute("href");
+    if (!hash || hash.charAt(0) !== "#") return;
+
+    const tile = document.getElementById(hash.slice(1));
+    if (!tile) return;
+
+    event.preventDefault();
+    tile.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", hash);
+    flashProjectTile(tile);
+    tile.focus({ preventScroll: true });
+  });
+
+  if (!tiles.length || typeof IntersectionObserver === "undefined") return;
+
+  const setActiveLink = function (activeId) {
+    links.forEach(function (link) {
+      const isActive = link.getAttribute("href") === "#" + activeId;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      const intersecting = entries
+        .filter(function (entry) {
+          return entry.isIntersecting;
+        })
+        .sort(function (a, b) {
+          return b.intersectionRatio - a.intersectionRatio;
+        });
+
+      if (intersecting.length) {
+        setActiveLink(intersecting[0].target.id);
+      }
+    },
+    {
+      root: null,
+      rootMargin: "-45% 0px -40% 0px",
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    }
+  );
+
+  tiles.forEach(function (tile) {
+    observer.observe(tile);
+  });
+
+  if (location.hash) {
+    const hashTile = document.getElementById(location.hash.slice(1));
+    if (hashTile && tiles.indexOf(hashTile) !== -1) {
+      setActiveLink(hashTile.id);
+    }
+  }
 }
 
 function renderAwards() {

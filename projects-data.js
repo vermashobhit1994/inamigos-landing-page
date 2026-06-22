@@ -95,6 +95,7 @@ window.PROJECTS = [
             category: "Relief & Food",
             description:
                 "Food, clothes, and essentials for families in need.",
+            stat: "50,000+ meals distributed",
             imageFit: "cover",
             image: "./assets/section/seva-section-card-1200.jpg",
             imageSrcset:
