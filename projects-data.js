@@ -93,14 +93,14 @@ window.PROJECTS = [
         imageFit: "cover",
         card: {
             category: "Relief & Food",
-            description:
-                "Food, clothes, and essentials for families in need.",
+            description: "Food, clothes, and essentials for families in need.",
             stat: "50,000+ meals distributed",
             imageFit: "cover",
             image: "./assets/section/seva-section-card-1200.jpg",
             imageSrcset:
                 "./assets/section/seva-section-card-600.jpg 600w, ./assets/section/seva-section-card-900.jpg 900w, ./assets/section/seva-section-card-1200.jpg 1200w",
-            imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px",
+            imageSizes:
+                "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px",
             alt: "Volunteers distributing food and essentials to families",
         },
         highlights: [
@@ -147,220 +147,213 @@ window.PROJECTS = [
         ],
         workDone: {
             heading: "Work we have done",
-            intro:
-                "Real relief on the ground — meals, essentials, and emergency support delivered by InAmigos volunteers across communities.",
+            intro: "Real relief on the ground — meals, essentials, and emergency support delivered by InAmigos volunteers across communities.",
             items: [
                 {
                     title: "Daily meal distribution",
                     description:
                         "Fresh cooked meals and dry-ration kits reach families facing food insecurity — over 50,000 meals distributed to date through community kitchens and outreach drives.",
-                    image:
-                        "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80",
+                    image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80",
                     alt: "Volunteers packing meals for daily distribution",
                 },
                 {
                     title: "COVID-19 emergency relief",
                     description:
                         "During the lockdown, Seva teams fed 1,500+ people who had no other support — daily-wage workers, the elderly, and families cut off from aid.",
-                    image:
-                        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+                    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
                     alt: "Relief supplies prepared during COVID-19 outreach",
                 },
                 {
                     title: "Clothes & daily essentials",
                     description:
                         "Beyond food, Seva provides clothing, hygiene kits, and household essentials so families can rebuild dignity alongside basic needs.",
-                    image:
-                        "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
+                    image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
                     alt: "Volunteer handing essentials to a family in need",
                 },
                 {
                     title: "Community kitchen support",
                     description:
                         "Local kitchens are supported year-round so nutritious food can be prepared and distributed quickly whenever a neighbourhood needs help.",
-                    image:
-                        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
+                    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
                     alt: "Community kitchen preparing food for distribution",
                 },
             ],
         },
     },
-  {
-    id: "udaan",
-    title: "Udaan",
-    category: "Women Empowerment",
-    description:
-      "Empowering women with skills, opportunities, and financial independence through training and mentorship.",
-    image: "./assets/section/udaan-section.jpg",
-    alt: "Women learning new skills together",
-    link: "#",
-    accent: "blue",
-    size: "wide",
-    gridPlace: "udaan",
-    card: {
-      category: "Women Empowerment",
-      description:
-        "Skills training and mentorship that help women and girls build financial independence.",
-      stat: "900+ girls empowered",
-      image: "./assets/section/udaan-section-card-1200.jpg",
-      imageSrcset:
-        "./assets/section/udaan-section-card-600.jpg 600w, ./assets/section/udaan-section-card-900.jpg 900w, ./assets/section/udaan-section-card-1200.jpg 1200w",
-      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px",
-      alt: "Women learning new skills together",
+    {
+        id: "udaan",
+        title: "Udaan",
+        category: "Women Empowerment",
+        description:
+            "Empowering women with skills, opportunities, and financial independence through training and mentorship.",
+        image: "./assets/section/udaan-section.jpg",
+        alt: "Women learning new skills together",
+        link: "#",
+        accent: "blue",
+        size: "wide",
+        gridPlace: "udaan",
+        card: {
+            category: "Women Empowerment",
+            description:
+                "Skills training and mentorship that help women and girls build financial independence.",
+            stat: "900+ girls empowered",
+            image: "./assets/section/udaan-section-card-1200.jpg",
+            imageSrcset:
+                "./assets/section/udaan-section-card-600.jpg 600w, ./assets/section/udaan-section-card-900.jpg 900w, ./assets/section/udaan-section-card-1200.jpg 1200w",
+            imageSizes:
+                "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px",
+            alt: "Women learning new skills together",
+        },
+        gallery: [
+            {
+                image: "./assets/udaan-campaign.jpg",
+                alt: "Women learning desktop publishing skills",
+            },
+            {
+                image: "./assets/stories/udaan-campaign.jpg",
+                alt: "Mentorship session during Project Udaan",
+            },
+        ],
     },
-    gallery: [
-      {
-        image: "./assets/udaan-campaign.jpg",
-        alt: "Women learning desktop publishing skills",
-      },
-      {
-        image: "./assets/stories/udaan-campaign.jpg",
-        alt: "Mentorship session during Project Udaan",
-      },
-    ],
-  },
-  {
-    id: "bachpanshala",
-    title: "Bachpanshala",
-    category: "Education",
-    description:
-      "Education and care for underprivileged children, giving them a brighter start in life.",
-    image: "./assets/section/bachpanshala-section.jpg",
-    alt: "Underprivileged children learning in a classroom",
-    link: "#",
-    accent: "green",
-    size: "tall",
-    gridPlace: "bachpanshala",
-    card: {
-      category: "Education",
-      description:
-        "Classroom learning, meals, and care for underprivileged children.",
-      image: "./assets/section/bachpanshala-section-card-1200.jpg",
-      imageSrcset:
-        "./assets/section/bachpanshala-section-card-600.jpg 600w, ./assets/section/bachpanshala-section-card-900.jpg 900w, ./assets/section/bachpanshala-section-card-1200.jpg 1200w",
-      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
-      alt: "Underprivileged children learning in a classroom",
+    {
+        id: "bachpanshala",
+        title: "Bachpanshala",
+        category: "Education",
+        description:
+            "Education and care for underprivileged children, giving them a brighter start in life.",
+        image: "./assets/section/bachpanshala-section.jpg",
+        alt: "Underprivileged children learning in a classroom",
+        link: "#",
+        accent: "green",
+        size: "tall",
+        gridPlace: "bachpanshala",
+        card: {
+            category: "Education",
+            description:
+                "Classroom learning, meals, and care for underprivileged children.",
+            image: "./assets/section/bachpanshala-section-card-1200.jpg",
+            imageSrcset:
+                "./assets/section/bachpanshala-section-card-600.jpg 600w, ./assets/section/bachpanshala-section-card-900.jpg 900w, ./assets/section/bachpanshala-section-card-1200.jpg 1200w",
+            imageSizes:
+                "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+            alt: "Underprivileged children learning in a classroom",
+        },
+        gallery: [
+            {
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da280a25?w=600&q=80",
+                alt: "Children learning together in class",
+            },
+            {
+                image: "https://images.unsplash.com/photo-1497633762263-f141af087744?w=600&q=80",
+                alt: "Books and learning materials for students",
+            },
+        ],
     },
-    gallery: [
-      {
-        image:
-          "https://images.unsplash.com/photo-1503676260728-1c00da280a25?w=600&q=80",
-        alt: "Children learning together in class",
-      },
-      {
-        image:
-          "https://images.unsplash.com/photo-1497633762263-f141af087744?w=600&q=80",
-        alt: "Books and learning materials for students",
-      },
-    ],
-  },
-  {
-    id: "vikas",
-    title: "Vikas",
-    category: "Youth & Skills",
-    description:
-      "Helping youth grow through internships, workshops, and hands-on skill-building.",
-    image: "./assets/section/vikas-section.jpg",
-    alt: "Young people collaborating on a project",
-    link: "#",
-    accent: "blue",
-    size: "tall",
-    gridPlace: "vikas",
-    card: {
-      category: "Youth & Skills",
-      description:
-        "Internships and workshops that prepare young people for work and leadership.",
-      image: "./assets/section/vikas-section-card-1200.jpg",
-      imageSrcset:
-        "./assets/section/vikas-section-card-600.jpg 600w, ./assets/section/vikas-section-card-900.jpg 900w, ./assets/section/vikas-section-card-1200.jpg 1200w",
-      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
-      alt: "Young people collaborating on a project",
+    {
+        id: "vikas",
+        title: "Vikas",
+        category: "Youth & Skills",
+        description:
+            "Helping youth grow through internships, workshops, and hands-on skill-building.",
+        image: "./assets/section/vikas-section.jpg",
+        alt: "Young people collaborating on a project",
+        link: "#",
+        accent: "blue",
+        size: "tall",
+        gridPlace: "vikas",
+        card: {
+            category: "Youth & Skills",
+            description:
+                "Internships and workshops that prepare young people for work and leadership.",
+            image: "./assets/section/vikas-section-card-1200.jpg",
+            imageSrcset:
+                "./assets/section/vikas-section-card-600.jpg 600w, ./assets/section/vikas-section-card-900.jpg 900w, ./assets/section/vikas-section-card-1200.jpg 1200w",
+            imageSizes:
+                "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+            alt: "Young people collaborating on a project",
+        },
+        gallery: [
+            {
+                image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
+                alt: "Youth collaborating on a skills project",
+            },
+            {
+                image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80",
+                alt: "Interns in a workshop session",
+            },
+        ],
     },
-    gallery: [
-      {
-        image:
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
-        alt: "Youth collaborating on a skills project",
-      },
-      {
-        image:
-          "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80",
-        alt: "Interns in a workshop session",
-      },
-    ],
-  },
-  {
-    id: "jeev",
-    title: "Jeev",
-    category: "Animal Welfare",
-    description:
-      "Supporting and rescuing animals in need of care, shelter, and daily feeding.",
-    image: "./assets/section/jeev-section.jpg",
-    alt: "Rescued dog being cared for by a volunteer",
-    link: "#",
-    accent: "green",
-    size: "tall",
-    gridPlace: "jeev",
-    card: {
-      category: "Animal Welfare",
-      description: "Rescue, shelter, and daily care for animals in need.",
-      stat: "50+ animals fed daily",
-      image: "./assets/section/jeev-section-card-1200.jpg",
-      imageSrcset:
-        "./assets/section/jeev-section-card-600.jpg 600w, ./assets/section/jeev-section-card-900.jpg 900w, ./assets/section/jeev-section-card-1200.jpg 1200w",
-      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
-      alt: "Rescued dog being cared for by a volunteer",
+    {
+        id: "jeev",
+        title: "Jeev",
+        category: "Animal Welfare",
+        description:
+            "Supporting and rescuing animals in need of care, shelter, and daily feeding.",
+        image: "./assets/section/jeev-section.jpg",
+        alt: "Rescued dog being cared for by a volunteer",
+        link: "#",
+        accent: "green",
+        size: "tall",
+        gridPlace: "jeev",
+        card: {
+            category: "Animal Welfare",
+            description: "Rescue, shelter, and daily care for animals in need.",
+            stat: "50+ animals fed daily",
+            image: "./assets/section/jeev-section-card-1200.jpg",
+            imageSrcset:
+                "./assets/section/jeev-section-card-600.jpg 600w, ./assets/section/jeev-section-card-900.jpg 900w, ./assets/section/jeev-section-card-1200.jpg 1200w",
+            imageSizes:
+                "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+            alt: "Rescued dog being cared for by a volunteer",
+        },
+        gallery: [
+            {
+                image: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80",
+                alt: "Rescued dog receiving care",
+            },
+            {
+                image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80",
+                alt: "Volunteer feeding a stray animal",
+            },
+        ],
     },
-    gallery: [
-      {
-        image:
-          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80",
-        alt: "Rescued dog receiving care",
-      },
-      {
-        image:
-          "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80",
-        alt: "Volunteer feeding a stray animal",
-      },
-    ],
-  },
-  {
-    id: "prakriti",
-    title: "Prakriti",
-    category: "Environment",
-    description:
-      "Environmental conservation through clean-up drives, plantation, and community green spaces.",
-    image: "./assets/section/prakriti-section.jpg",
-    alt: "Volunteers planting trees during a plantation drive",
-    link: "#",
-    accent: "green",
-    size: "tall",
-    gridPlace: "prakriti",
-    card: {
-      category: "Environment",
-      description:
-        "Tree plantation and neighbourhood clean-up drives across the city.",
-      stat: "20,000+ trees planted",
-      image: "./assets/section/prakriti-section-card-1200.jpg",
-      imageSrcset:
-        "./assets/section/prakriti-section-card-600.jpg 600w, ./assets/section/prakriti-section-card-900.jpg 900w, ./assets/section/prakriti-section-card-1200.jpg 1200w",
-      imageSizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
-      alt: "Volunteers planting trees during a plantation drive",
+    {
+        id: "prakriti",
+        title: "Prakriti",
+        category: "Environment",
+        description:
+            "Environmental conservation through clean-up drives, plantation, and community green spaces.",
+        image: "./assets/section/prakriti-section.jpg",
+        alt: "Volunteers planting trees during a plantation drive",
+        link: "#",
+        accent: "green",
+        size: "tall",
+        gridPlace: "prakriti",
+        card: {
+            category: "Environment",
+            description:
+                "Tree plantation and neighbourhood clean-up drives across the city.",
+            stat: "20,000+ trees planted",
+            image: "./assets/section/prakriti-section-card-1200.jpg",
+            imageSrcset:
+                "./assets/section/prakriti-section-card-600.jpg 600w, ./assets/section/prakriti-section-card-900.jpg 900w, ./assets/section/prakriti-section-card-1200.jpg 1200w",
+            imageSizes:
+                "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px",
+            alt: "Volunteers planting trees during a plantation drive",
+        },
+        gallery: [
+            {
+                image: "./assets/praktri.jpg",
+                alt: "Tree plantation drive in progress",
+            },
+            {
+                image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80",
+                alt: "Volunteers cleaning a green space",
+            },
+        ],
     },
-    gallery: [
-      {
-        image: "./assets/praktri.jpg",
-        alt: "Tree plantation drive in progress",
-      },
-      {
-        image:
-          "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80",
-        alt: "Volunteers cleaning a green space",
-      },
-    ],
-  },
 
-  // ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
     // TEMPLATE — copy this block, remove the // in front of each line,
     // move it above this comment, and fill in your project.
     // ----------------------------------------------------------------------
