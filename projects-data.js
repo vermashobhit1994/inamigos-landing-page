@@ -222,6 +222,68 @@ window.projectSlug = function (project) {
 };
 
 // ==========================================================================
+// WHO WE ARE — Mission, Vision & Values (index.html #about)
+// ==========================================================================
+//
+// Edit this block to update the "Who We Are" section on the homepage.
+//
+// FIELD GUIDE
+//   eyebrow     optional    Small label above the heading.
+//   heading     (required)  Section title.
+//   intro       (required)  Opening paragraph.
+//   hook        optional    Short attention line shown as a badge.
+//   pillars     (required)  List of Mission, Vision, Values (see below).
+//
+// PILLAR FIELDS
+//   id          optional    Anchor id for nav links, e.g. "mission"
+//   label       (required)  "Mission", "Vision", or "Values"
+//   tagline     optional    Short line above the label, e.g. "What we do daily"
+//   body        (required)  Main text (string or array of strings)
+//   points      optional    Bullet list — use for Values
+//   accent      optional    "green", "blue", or "yellow" (default: "green")
+//   featured    optional    true — larger spotlight card (best for Mission)
+// --------------------------------------------------------------------------
+
+window.ABOUT = {
+  eyebrow: "Who We Are",
+  heading: "Rooted in compassion, growing through action",
+  intro:
+    "Since 2020, InAmigos has partnered with local communities to address the root causes of poverty — with transparency, dignity, and collaboration at the centre of everything we do.",
+  hook: "Purpose-led. People-first. Impact-driven.",
+  pillars: [
+    {
+      id: "mission",
+      label: "Mission",
+      tagline: "What we do every day",
+      body:
+        "We commit to creating lasting social impact by addressing critical societal issues through a network of dedicated professionals and volunteers.",
+      accent: "green",
+      featured: true,
+    },
+    {
+      id: "vision",
+      label: "Vision",
+      tagline: "Where we're heading",
+      body:
+        "A world where every person has access to opportunity, care, and hope — and no one is left behind.",
+      accent: "blue",
+    },
+    {
+      id: "values",
+      label: "Values",
+      tagline: "How we show up",
+      body: "The principles that guide every programme, partnership, and rupee spent.",
+      points: [
+        "Transparency — open reporting on every rupee",
+        "Dignity — respect for every life we serve",
+        "Collaboration — communities lead, we support",
+      ],
+      accent: "yellow",
+    },
+  ],
+};
+
+// ==========================================================================
 // AWARDS & ACHIEVEMENTS CONTENT
 // ==========================================================================
 //
@@ -235,50 +297,48 @@ window.projectSlug = function (project) {
 //   title    (required)  Name of the award or milestone.
 //   issuer   optional    Who gave it / where it's from.
 //   detail   optional    A short sentence of extra context.
-//   accent   optional    "green" or "blue" (default: "green").
+//   image    (required)  Photo path, e.g. "./assets/awards/photo.jpg"
+//   alt      (required)  Describe the award photo for screen readers.
+//   accent   optional    "green" or "blue" (default: "green")
+//   featured optional    true — larger spotlight card (use for your top honour)
 // --------------------------------------------------------------------------
 
 window.AWARDS = [
-  {
-    year: "2023",
-    title: "Best NGO for Community Impact",
-    issuer: "State Social Welfare Board",
-    detail: "Recognised for sustained grassroots work across 40+ communities.",
-    accent: "green",
-  },
-  {
-    year: "2022",
-    title: "Excellence in Education Award",
-    issuer: "National Education Trust",
-    detail: "Honoured for the Bachpanshala learning programme.",
-    accent: "blue",
-  },
-  {
-    year: "2021",
-    title: "COVID-19 Relief Recognition",
-    issuer: "District Administration",
-    detail: "For distributing food to 1,500+ people during the pandemic.",
-    accent: "green",
-  },
-  {
-    year: "2020",
-    title: "Green Initiative of the Year",
-    issuer: "Environment Forum",
-    detail: "Awarded for the Prakriti plantation drives — 20,000+ trees.",
-    accent: "blue",
-  },
+    {
+        year: "17 December 2025",
+        title: "Top 5 NGO of Year 2025",
+        issuer: "Brand Honchos",
+        detail: "Hon'ble Mayor Delhi at Hyatt Centric, New Delhi",
+        image: "./assets/awards/top-ngo-2025.jpg",
+        alt: "InAmigos team receiving Top 5 NGO of the Year 2025 award",
+        accent: "green",
+        featured: true,
+    },
+    {
+        year: "12 December 2025",
+        title: "Finalist in Indian Social Impact Awards",
+        issuer: "Indian Social Impact Awards",
+        detail:
+            "Reached the finals at SPJIMR, a 40+ year old Tier-1 business school.",
+        image: "./assets/awards/social-impact-2025.jpg",
+        alt: "InAmigos at the Indian Social Impact Awards ceremony",
+        accent: "blue",
+    },
 
-  // ----------------------------------------------------------------------
-  // TEMPLATE — copy this block, remove the // in front of each line,
-  // move it above this comment, and fill in your award.
-  // ----------------------------------------------------------------------
-  // {
-  //   year: "2025",
-  //   title: "Award or Milestone Name",
-  //   issuer: "Who awarded it",
-  //   detail: "A short sentence of context.",
-  //   accent: "green",            // "green" or "blue"
-  // },
+    // ----------------------------------------------------------------------
+    // TEMPLATE — copy this block, remove the // in front of each line,
+    // move it above this comment, and fill in your award.
+    // ----------------------------------------------------------------------
+    // {
+    //   year: "2025",
+    //   title: "Award or Milestone Name",
+    //   issuer: "Who awarded it",
+    //   detail: "A short sentence of context.",
+    //   image: "./assets/awards/your-photo.jpg",
+    //   alt: "Describe the award photo",
+    //   accent: "green",            // "green" or "blue"
+    //   featured: false,           // true for a large spotlight card
+    // },
 ];
 
 // ==========================================================================

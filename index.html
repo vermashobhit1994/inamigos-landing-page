@@ -11,8 +11,30 @@
         <link
             rel="preload"
             as="image"
-            href="./assets/hero-1.png"
+            href="./assets/hero/hero-640.webp"
+            type="image/webp"
+            media="(max-width: 768px)"
             fetchpriority="high"
+            imagesrcset="
+                ./assets/hero/hero-480.webp 480w,
+                ./assets/hero/hero-640.webp 640w,
+                ./assets/hero/hero-768.webp 768w
+            "
+            imagesizes="100vw"
+        />
+        <link
+            rel="preload"
+            as="image"
+            href="./assets/hero/hero-1024.webp"
+            type="image/webp"
+            media="(min-width: 769px)"
+            fetchpriority="high"
+            imagesrcset="
+                ./assets/hero/hero-768.webp 768w,
+                ./assets/hero/hero-1024.webp 1024w,
+                ./assets/hero/hero-1200.webp 1200w
+            "
+            imagesizes="(max-width: 1200px) 50vw, 600px"
         />
         <link rel="stylesheet" href="styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -170,65 +192,62 @@
                     </div>
 
                     <div class="hero__visual">
-                        <img
-                            src="./assets/hero-1.png"
-                            alt="InAmigos impact collage — communities, children, meals, trees, and animals helped through kindness."
-                            class="hero__photo"
-                            width="1200"
-                            height="800"
-                            loading="eager"
-                            fetchpriority="high"
-                            decoding="async"
-                        />
+                        <picture>
+                            <source
+                                type="image/webp"
+                                srcset="
+                                    ./assets/hero/hero-480.webp 480w,
+                                    ./assets/hero/hero-640.webp 640w,
+                                    ./assets/hero/hero-768.webp 768w,
+                                    ./assets/hero/hero-1024.webp 1024w,
+                                    ./assets/hero/hero-1200.webp 1200w,
+                                    ./assets/hero/hero-1536.webp 1536w
+                                "
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                            />
+                            <source
+                                type="image/jpeg"
+                                srcset="
+                                    ./assets/hero/hero-480.jpg 480w,
+                                    ./assets/hero/hero-640.jpg 640w,
+                                    ./assets/hero/hero-768.jpg 768w,
+                                    ./assets/hero/hero-1024.jpg 1024w,
+                                    ./assets/hero/hero-1200.jpg 1200w,
+                                    ./assets/hero/hero-1536.jpg 1536w
+                                "
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                            />
+                            <img
+                                src="./assets/hero/hero-768.jpg"
+                                srcset="
+                                    ./assets/hero/hero-480.jpg 480w,
+                                    ./assets/hero/hero-640.jpg 640w,
+                                    ./assets/hero/hero-768.jpg 768w,
+                                    ./assets/hero/hero-1024.jpg 1024w,
+                                    ./assets/hero/hero-1200.jpg 1200w,
+                                    ./assets/hero/hero-1536.jpg 1536w
+                                "
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                                alt="InAmigos impact collage — communities, children, meals, trees, and animals helped through kindness."
+                                class="hero__photo"
+                                width="1536"
+                                height="1024"
+                                loading="eager"
+                                fetchpriority="high"
+                                decoding="async"
+                            />
+                        </picture>
                     </div>
                 </div>
             </section>
 
-            <!-- About -->
+            <!-- About — Mission, Vision & Values (from projects-data.js) -->
             <section
                 id="about"
                 class="section about"
                 aria-labelledby="about-heading"
             >
-                <div class="container about__inner">
-                    <header class="section__header">
-                        <p class="eyebrow">Who We Are</p>
-                        <h2 id="about-heading">
-                            Rooted in compassion, growing through action
-                        </h2>
-                        <p class="section__intro">
-                            Since 2020, InAmigos has partnered with local
-                            communities to address the root causes of poverty.
-                            We believe transparency, dignity, and collaboration
-                            are the foundation of meaningful change.
-                        </p>
-                    </header>
-                    <div class="about__values">
-                        <article class="value-card value-card--green">
-                            <span class="value-card__num">01</span>
-                            <h3>Mission</h3>
-                            <p>
-                                commit to create lasting social impact by addressing critical societal issues through network of dedicated professional and volunteers.
-                            </p>
-                        </article>
-                        <article class="value-card value-card--blue">
-                            <span class="value-card__num">02</span>
-                            <h3>Vision</h3>
-                            <p>
-                                A world where every person has access to
-                                opportunity, care, and hope.
-                            </p>
-                        </article>
-                        <article class="value-card value-card--green">
-                            <span class="value-card__num">03</span>
-                            <h3>Values</h3>
-                            <p>
-                                98% of funds go directly to programs — we report
-                                openly on every rupee spent.
-                            </p>
-                        </article>
-                    </div>
-                </div>
+                <div class="container" id="about-content"></div>
             </section>
 
             <!-- Ongoing Projects (rendered from the list in scripts.js) -->
@@ -594,7 +613,7 @@
                 class="section awards"
                 aria-labelledby="awards-heading"
             >
-                <div class="container">
+                <div class="container"> 
                     <header class="section__header section__header--center">
                         <p class="eyebrow">Recognition</p>
                         <h2 id="awards-heading">Awards &amp; Achievements</h2>
@@ -602,6 +621,7 @@
                             Milestones and honours that reflect the trust of our
                             community and the impact we create together.
                         </p>
+                        <p class="awards__proof" id="awards-proof"></p>
                     </header>
 
                     <!--

@@ -129,6 +129,7 @@ function renderProjects() {
 
 function renderAwards() {
   const grid = document.getElementById("awards-grid");
+  const proof = document.getElementById("awards-proof");
   if (!grid) return;
 
   const awards = Array.isArray(window.AWARDS) ? window.AWARDS : [];
@@ -141,18 +142,42 @@ function renderAwards() {
       .replace(/"/g, "&quot;");
   };
 
+  if (proof && awards.length) {
+    const count = awards.length;
+    proof.innerHTML =
+      '<span class="awards__proof-badge" aria-hidden="true">★</span>' +
+      "<span><strong>" +
+      escapeHtml(String(count)) +
+      " honours earned</strong> — proof that communities trust our work</span>";
+  }
+
   grid.innerHTML = awards
-    .map(function (award) {
+    .map(function (award, index) {
       const accent = award.accent === "blue" ? "blue" : "green";
+      const featured =
+        award.featured || index === 0 ? " award-card--featured" : "";
+      const imageSrc = award.image || "./assets/awards/placeholder.jpg";
+      const imageAlt = award.alt || award.title || "Award photo";
+
       return (
         '<li class="award-card award-card--' +
         accent +
+        featured +
         '">' +
+        '<div class="award-card__media">' +
+        '<img src="' +
+        escapeHtml(imageSrc) +
+        '" alt="' +
+        escapeHtml(imageAlt) +
+        '" loading="lazy" />' +
+        '<div class="award-card__media-overlay" aria-hidden="true"></div>' +
         (award.year
           ? '<span class="award-card__year">' +
             escapeHtml(award.year) +
             "</span>"
           : "") +
+        '<span class="award-card__ribbon">Honoured</span>' +
+        "</div>" +
         '<div class="award-card__body">' +
         '<span class="award-card__icon" aria-hidden="true">🏆</span>' +
         "<h3>" +
@@ -295,8 +320,122 @@ function renderTestimonials() {
     .join("");
 }
 
+function renderAbout() {
+  const mount = document.getElementById("about-content");
+  if (!mount) return;
+
+  const about = window.ABOUT || {};
+  const pillars = Array.isArray(about.pillars) ? about.pillars : [];
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  const pillarIcons = {
+    mission: "◎",
+    vision: "◇",
+    values: "✦",
+  };
+
+  const toBody = function (body) {
+    if (!body) return "";
+    const parts = Array.isArray(body) ? body : [body];
+    return parts
+      .map(function (p) {
+        return "<p>" + escapeHtml(p) + "</p>";
+      })
+      .join("");
+  };
+
+  const pillarsHtml = pillars
+    .map(function (pillar, index) {
+      const accent =
+        pillar.accent === "blue"
+          ? "blue"
+          : pillar.accent === "yellow"
+            ? "yellow"
+            : "green";
+      const featured = pillar.featured ? " about-pillar--featured" : "";
+      const anchorId = pillar.id ? escapeHtml(pillar.id) : "";
+      const iconKey = (pillar.id || pillar.label || "").toLowerCase();
+      const icon = pillarIcons[iconKey] || String(index + 1).padStart(2, "0");
+
+      const pointsHtml =
+        Array.isArray(pillar.points) && pillar.points.length
+          ? '<ul class="about-pillar__points">' +
+            pillar.points
+              .map(function (point) {
+                return "<li>" + escapeHtml(point) + "</li>";
+              })
+              .join("") +
+            "</ul>"
+          : "";
+
+      return (
+        '<article class="about-pillar about-pillar--' +
+        accent +
+        featured +
+        '"' +
+        (anchorId ? ' id="' + anchorId + '"' : "") +
+        ' aria-labelledby="about-' +
+        (anchorId || "pillar-" + index) +
+        '">' +
+        '<div class="about-pillar__icon" aria-hidden="true">' +
+        escapeHtml(icon) +
+        "</div>" +
+        '<div class="about-pillar__content">' +
+        (pillar.tagline
+          ? '<span class="about-pillar__tagline">' +
+            escapeHtml(pillar.tagline) +
+            "</span>"
+          : "") +
+        '<h3 id="about-' +
+        (anchorId || "pillar-" + index) +
+        '">' +
+        escapeHtml(pillar.label || "") +
+        "</h3>" +
+        toBody(pillar.body) +
+        pointsHtml +
+        "</div>" +
+        '<span class="about-pillar__index" aria-hidden="true">' +
+        String(index + 1).padStart(2, "0") +
+        "</span>" +
+        "</article>"
+      );
+    })
+    .join("");
+
+  mount.innerHTML =
+    '<header class="about__header section__header section__header--center">' +
+    (about.eyebrow
+      ? '<p class="eyebrow">' + escapeHtml(about.eyebrow) + "</p>"
+      : "") +
+    '<h2 id="about-heading">' +
+    escapeHtml(about.heading || "Who we are") +
+    "</h2>" +
+    (about.intro
+      ? '<p class="section__intro about__intro">' +
+        escapeHtml(about.intro) +
+        "</p>"
+      : "") +
+    (about.hook
+      ? '<p class="about__hook"><span class="about__hook-dot" aria-hidden="true"></span>' +
+        escapeHtml(about.hook) +
+        "</p>"
+      : "") +
+    "</header>" +
+    '<div class="about__pillars">' +
+    pillarsHtml +
+    "</div>";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   renderProjects();
+  renderAbout();
   renderAwards();
   renderTestimonials();
   renderFaqs();
