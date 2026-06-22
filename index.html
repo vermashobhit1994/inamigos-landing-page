@@ -295,123 +295,13 @@
                 </div>
             </section>
 
-            <!-- Impact Journey -->
-            <section class="section journey" aria-labelledby="journey-heading">
-                <div class="container">
-                    <header class="section__header section__header--center">
-                        <p class="eyebrow">How It Works</p>
-                        <h2 id="journey-heading">Your impact journey</h2>
-                    </header>
-
-                    <div class="journey__steps">
-                        <article class="journey__step journey__step--green">
-                            <span class="journey__num">01</span>
-                            <div class="journey__icon" aria-hidden="true">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                >
-                                    <path
-                                        d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                    />
-                                </svg>
-                            </div>
-                            <h3>You Donate</h3>
-                            <p>
-                                Your contribution fuels real programs on the
-                                ground.
-                            </p>
-                        </article>
-
-                        <article class="journey__step journey__step--blue">
-                            <div class="journey__icon" aria-hidden="true">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                >
-                                    <path
-                                        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                    />
-                                </svg>
-                            </div>
-                            <h3>We Act</h3>
-                            <p>
-                                Our teams deliver aid, education, and healthcare
-                                directly.
-                            </p>
-                        </article>
-
-                        <article class="journey__step journey__step--green">
-                            <span class="journey__num">03</span>
-                            <div class="journey__icon" aria-hidden="true">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                >
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="9"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                    />
-                                    <path
-                                        d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                    />
-                                </svg>
-                            </div>
-                            <h3>Lives Change</h3>
-                            <p>
-                                Families gain access, opportunity, and dignity.
-                            </p>
-                        </article>
-
-                        <article class="journey__step journey__step--blue">
-                            <span class="journey__num">04</span>
-                            <div class="journey__icon" aria-hidden="true">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                >
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="4"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                    />
-                                    <path
-                                        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                    />
-                                </svg>
-                            </div>
-                            <h3>Better Future</h3>
-                            <p>
-                                Communities grow stronger, generation after
-                                generation.
-                            </p>
-                        </article>
-                    </div>
-                </div>
+            <!-- How It Works — impact journey (from projects-data.js) -->
+            <section
+                id="journey"
+                class="section journey"
+                aria-labelledby="journey-heading"
+            >
+                <div class="container" id="journey-content"></div>
             </section>
 
             <!-- Real Stories -->
@@ -784,11 +674,22 @@
                             </div>
 
                             <p class="donate-card__impact">
-                                <span aria-hidden="true">&#10084;</span>
-                                Provides
-                                <strong id="impact-count">1</strong>
-                                <span id="impact-noun">months</span> of school
-                                supplies for a child in need.
+                                <span
+                                    class="donate-card__impact-icon"
+                                    aria-hidden="true"
+                                    >&#10084;</span
+                                >
+                                <span class="donate-card__impact-text">
+                                    <span class="donate-card__impact-lead">
+                                        Provides
+                                        <strong id="impact-count">1</strong>
+                                        <span id="impact-noun">month</span>
+                                    </span>
+                                    <span class="donate-card__impact-detail"
+                                        >of school supplies for a child in
+                                        need.</span
+                                    >
+                                </span>
                             </p>
 
                             <div class="donate-card__summary">
@@ -869,6 +770,15 @@
                     <div class="faq__list" id="faq-list"></div>
                 </div>
             </section>
+
+            <!-- Contact & Licenses (from projects-data.js) -->
+            <section
+                id="contact"
+                class="section contact"
+                aria-labelledby="contact-heading"
+            >
+                <div class="container" id="contact-content"></div>
+            </section>
         </main>
 
         <footer class="site-footer">
@@ -881,9 +791,23 @@
                             class="logo logo--footer"
                         />
                     </a>
-                    <p>
-                        Registered under Section 8 of the Companies Act.
-                        Tax-exempt donations (80G eligible).
+                    <p class="footer__registrations">
+                        <span class="footer__reg-label">Registered under</span>
+                        <a href="#licenses" class="footer__reg-highlight"
+                            >Section 8, Companies Act 2013</a
+                        >,
+                        <a href="#licenses" class="footer__reg-highlight"
+                            >80G &amp; 12A certified</a
+                        >,
+                        <a href="#licenses" class="footer__reg-highlight"
+                            >CSR-1 registered</a
+                        >,
+                        <a href="#licenses" class="footer__reg-highlight"
+                            >IAF ISO 9001:2015 Certified</a
+                        >,
+                        <a href="#licenses" class="footer__reg-highlight"
+                            >NGO DARPAN Registered</a
+                        >.
                     </p>
                 </div>
                 <div class="footer__links">
@@ -893,18 +817,22 @@
                         <li><a href="#projects">Our Work</a></li>
                         <li><a href="#impact">Impact</a></li>
                         <li><a href="#get-involved">Donate</a></li>
+                        <li><a href="#licenses">Licenses</a></li>
                     </ul>
                 </div>
                 <div class="footer__contact">
                     <h3>Contact</h3>
                     <address>
-                        <p>14 Community Lane, Bandra West, Mumbai 400050</p>
+                        <p>Ward No. 5, Gram Post,
+                            Sipat Ujwal Nagar,
+                            Bilaspur. Chhattisgarh
+                            Pincode: 495555</p>
                         <p>
                             <a href="mailto:hello@InAmigos.org"
-                                >hello@InAmigos.org</a
+                                >inamigosfoundation@gmail.com</a
                             >
                         </p>
-                        <p><a href="tel:+912212345678">+91 22 1234 5678</a></p>
+                        <p><a href="tel:+912212345678">+91 626 730 9902</a></p>
                     </address>
                 </div>
             </div>

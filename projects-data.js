@@ -240,7 +240,76 @@ window.SECTION_NAV = [
   { id: "get-involved", label: "Donate" },
   { id: "testimonials", label: "Voices" },
   { id: "faq", label: "FAQ" },
+  { id: "contact", label: "Contact" },
 ];
+
+// ==========================================================================
+// HOW IT WORKS — Impact journey (index.html #journey)
+// ==========================================================================
+//
+// Edit this block to update the "How It Works" section on the homepage.
+//
+// FIELD GUIDE
+//   eyebrow     optional    Small label above the heading.
+//   heading     (required)  Section title.
+//   intro       (required)  Opening paragraph.
+//   hook        optional    Short attention line shown as a badge.
+//   cta         optional    { label, href } — button at the bottom.
+//   steps       (required)  List of journey steps (see below).
+//
+// STEP FIELDS
+//   num         (required)  Step number, e.g. "01"
+//   title       (required)  Step heading.
+//   body        (required)  Short description.
+//   tagline     optional    Micro-label above title, e.g. "Your starting point"
+//   accent      optional    "red", "blue", "green", or "yellow"
+//   icon        optional    "donate", "act", "change", or "future"
+//   featured    optional    true — spotlight card (best for step 1)
+// --------------------------------------------------------------------------
+
+window.JOURNEY = {
+  eyebrow: "How It Works",
+  heading: "Your gift becomes real change — in four steps",
+  intro:
+    "No black boxes. No guesswork. Follow exactly how your support travels from you to the communities we serve.",
+  hook: "Simple path. Lasting impact.",
+  cta: { label: "Start your impact today", href: "#get-involved" },
+  steps: [
+    {
+      num: "01",
+      title: "You Donate",
+      tagline: "Your starting point",
+      body: "Your contribution fuels real programmes on the ground — meals, education, care, and more.",
+      accent: "red",
+      icon: "donate",
+      featured: true,
+    },
+    {
+      num: "02",
+      title: "We Act",
+      tagline: "On the ground",
+      body: "Our teams and volunteers deliver aid, education, and healthcare directly where it's needed.",
+      accent: "blue",
+      icon: "act",
+    },
+    {
+      num: "03",
+      title: "Lives Change",
+      tagline: "Immediate difference",
+      body: "Families gain access, opportunity, and dignity — you see the human outcome of your gift.",
+      accent: "green",
+      icon: "change",
+    },
+    {
+      num: "04",
+      title: "Better Future",
+      tagline: "Generational impact",
+      body: "Communities grow stronger, generation after generation — the ripple keeps spreading.",
+      accent: "yellow",
+      icon: "future",
+    },
+  ],
+};
 
 // ==========================================================================
 // WHO WE ARE — Mission, Vision & Values (index.html #about)
@@ -405,6 +474,97 @@ window.FAQS = [
   // {
   //   q: "Your question here?",
   //   a: "Your answer here.",
+  // },
+];
+
+// ==========================================================================
+// CONTACT & LICENSES — index.html #contact
+// ==========================================================================
+//
+// Edit CONTACT for the heading and contact details.
+// Edit LICENSES to add or update certificate proof cards.
+//
+// LICENSE FIELDS
+//   title     (required)  Certificate name.
+//   issuer    optional    Issuing authority.
+//   number    optional    Registration / certificate number.
+//   year      optional    Year issued or valid from.
+//   accent    optional    "green" or "blue"
+//   featured  optional    true — spotlight card styling
+// --------------------------------------------------------------------------
+
+window.CONTACT = {
+  eyebrow: "Get in Touch",
+  heading: "Contact Us",
+  intro:
+    "Reach our team for donations, volunteering, partnerships, or general enquiries. We're here to help.",
+  hook: "Registered. Certified. Accountable.",
+  address: [
+    "Ward No. 5, Gram Post, Sipat Ujwal Nagar,",
+    "Bilaspur, Chhattisgarh — 495555",
+  ],
+  email: "inamigosfoundation@gmail.com",
+  phone: "+91 626 730 9902",
+  licensesHeading: "Licenses & Certifications",
+  licensesIntro:
+    "Official registrations and credentials — proof that InAmigos operates with full transparency and compliance.",
+};
+
+window.LICENSES = [
+  {
+    title: "Section 8 Company Registration",
+    issuer: "Ministry of Corporate Affairs, Govt. of India",
+    number: "Section 8 — Non-profit company",
+    year: "2020",
+    accent: "blue",
+    featured: true,
+  },
+  {
+    title: "80G Tax Exemption Certificate",
+    issuer: "Income Tax Department, Govt. of India",
+    number: "Donations eligible for tax deduction",
+    year: "2021",
+    accent: "green",
+  },
+  {
+    title: "12A Registration",
+    issuer: "Income Tax Department, Govt. of India",
+    number: "Income tax exemption for the organisation",
+    year: "2021",
+    accent: "blue",
+  },
+  {
+    title: "CSR-1 Registration",
+    issuer: "Ministry of Corporate Affairs, Govt. of India",
+    number: "Corporate Social Responsibility registration",
+    year: "2022",
+    accent: "green",
+  },
+  {
+    title: "IAF ISO 9001:2015 Certified",
+    issuer: "International Accreditation Forum",
+    number: "Quality management system certification",
+    year: "2023",
+    accent: "blue",
+  },
+  {
+    title: "NGO DARPAN Registration",
+    issuer: "NITI Aayam, Govt. of India",
+    number: "National NGO portal registration",
+    year: "2021",
+    accent: "green",
+  },
+
+  // ----------------------------------------------------------------------
+  // TEMPLATE — copy, uncomment, fill in, and add to the list above.
+  // ----------------------------------------------------------------------
+  // {
+  //   title: "Certificate Name",
+  //   issuer: "Issuing authority",
+  //   number: "Registration number",
+  //   year: "2024",
+  //   accent: "green",
+  //   featured: false,
   // },
 ];
 

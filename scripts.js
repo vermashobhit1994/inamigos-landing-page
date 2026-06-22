@@ -433,6 +433,270 @@ function renderAbout() {
     "</div>";
 }
 
+function renderJourney() {
+  const mount = document.getElementById("journey-content");
+  if (!mount) return;
+
+  const journey = window.JOURNEY || {};
+  const steps = Array.isArray(journey.steps) ? journey.steps : [];
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  const iconSvg = {
+    donate:
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="1.5"/></svg>',
+    act:
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    change:
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    future:
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  };
+
+  const arrowSvg =
+    '<svg class="journey__arrow-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  const accentClass = function (accent) {
+    if (accent === "red") return "red";
+    if (accent === "blue") return "blue";
+    if (accent === "yellow") return "yellow";
+    return "green";
+  };
+
+  let pathHtml = "";
+  steps.forEach(function (step, index) {
+    const accent = accentClass(step.accent);
+    const icon = iconSvg[step.icon] || iconSvg.donate;
+
+    pathHtml +=
+      '<li class="journey__path-node journey__path-node--' +
+      accent +
+      '">' +
+      '<div class="journey__path-icon">' +
+      icon +
+      "</div>" +
+      '<span class="journey__path-num">' +
+      escapeHtml(step.num || String(index + 1).padStart(2, "0")) +
+      "</span>" +
+      '<span class="journey__path-label">' +
+      escapeHtml(step.title || "") +
+      "</span>" +
+      "</li>";
+
+    if (index < steps.length - 1) {
+      pathHtml +=
+        '<li class="journey__path-arrow" aria-hidden="true">' +
+        arrowSvg +
+        "</li>";
+    }
+  });
+
+  let cardsHtml = "";
+  steps.forEach(function (step, index) {
+    const accent = accentClass(step.accent);
+    const featured = step.featured ? " journey__card--featured" : "";
+
+    cardsHtml +=
+      '<article class="journey__card journey__card--' +
+      accent +
+      featured +
+      '">' +
+      (step.tagline
+        ? '<span class="journey__card-tagline">' +
+          escapeHtml(step.tagline) +
+          "</span>"
+        : "") +
+      "<h3>" +
+      escapeHtml(step.title || "") +
+      "</h3>" +
+      "<p>" +
+      escapeHtml(step.body || "") +
+      "</p>" +
+      "</article>";
+  });
+
+  mount.innerHTML =
+    '<header class="journey__header section__header section__header--center">' +
+    (journey.eyebrow
+      ? '<p class="eyebrow">' + escapeHtml(journey.eyebrow) + "</p>"
+      : "") +
+    '<h2 id="journey-heading">' +
+    escapeHtml(journey.heading || "How it works") +
+    "</h2>" +
+    (journey.intro
+      ? '<p class="section__intro journey__intro">' +
+        escapeHtml(journey.intro) +
+        "</p>"
+      : "") +
+    (journey.hook
+      ? '<p class="journey__hook"><span class="journey__hook-dot" aria-hidden="true"></span>' +
+        escapeHtml(journey.hook) +
+        "</p>"
+      : "") +
+    "</header>" +
+    '<ol class="journey__path" aria-label="Impact journey steps">' +
+    pathHtml +
+    "</ol>" +
+    '<div class="journey__cards">' +
+    cardsHtml +
+    "</div>" +
+    (journey.cta && journey.cta.label
+      ? '<p class="journey__cta-wrap">' +
+        '<a href="' +
+        escapeHtml(journey.cta.href || "#get-involved") +
+        '" class="btn btn--pill btn--red journey__cta">' +
+        escapeHtml(journey.cta.label) +
+        "</a></p>"
+      : "");
+}
+
+function renderContact() {
+  const mount = document.getElementById("contact-content");
+  if (!mount) return;
+
+  const contact = window.CONTACT || {};
+  const licenses = Array.isArray(window.LICENSES) ? window.LICENSES : [];
+
+  const escapeHtml = function (value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  };
+
+  const phoneHref = contact.phone
+    ? "tel:" + String(contact.phone).replace(/[\s()-]/g, "")
+    : "";
+
+  const addressLines = Array.isArray(contact.address)
+    ? contact.address
+    : contact.address
+      ? [contact.address]
+      : [];
+
+  const licensesHtml = licenses
+    .map(function (license, index) {
+      const accent = license.accent === "blue" ? "blue" : "green";
+      const featured =
+        license.featured || index === 0 ? " license-card--featured" : "";
+
+      return (
+        '<li class="license-card license-card--' +
+        accent +
+        featured +
+        '">' +
+        '<div class="license-card__body">' +
+        '<div class="license-card__meta">' +
+        (license.year
+          ? '<span class="license-card__year">' +
+            escapeHtml(license.year) +
+            "</span>"
+          : "") +
+        '<span class="license-card__badge">Verified</span>' +
+        "</div>" +
+        "<h3>" +
+        escapeHtml(license.title || "") +
+        "</h3>" +
+        (license.issuer
+          ? '<p class="license-card__issuer">' +
+            escapeHtml(license.issuer) +
+            "</p>"
+          : "") +
+        (license.number
+          ? '<p class="license-card__number">' +
+            escapeHtml(license.number) +
+            "</p>"
+          : "") +
+        "</div>" +
+        "</li>"
+      );
+    })
+    .join("");
+
+  mount.innerHTML =
+    '<header class="contact__header section__header section__header--center">' +
+    (contact.eyebrow
+      ? '<p class="eyebrow">' + escapeHtml(contact.eyebrow) + "</p>"
+      : "") +
+    '<h2 id="contact-heading">' +
+    escapeHtml(contact.heading || "Contact Us") +
+    "</h2>" +
+    (contact.intro
+      ? '<p class="section__intro contact__intro">' +
+        escapeHtml(contact.intro) +
+        "</p>"
+      : "") +
+    (contact.hook
+      ? '<p class="contact__hook"><span class="contact__hook-dot" aria-hidden="true"></span>' +
+        escapeHtml(contact.hook) +
+        "</p>"
+      : "") +
+    "</header>" +
+    '<div class="contact__layout">' +
+    '<div class="contact__info">' +
+    '<div class="contact__card contact__card--address">' +
+    '<span class="contact__card-icon" aria-hidden="true">&#128205;</span>' +
+    "<h3>Visit us</h3>" +
+    "<address>" +
+    addressLines
+      .map(function (line) {
+        return "<p>" + escapeHtml(line) + "</p>";
+      })
+      .join("") +
+    "</address>" +
+    "</div>" +
+    (contact.email
+      ? '<div class="contact__card contact__card--email">' +
+        '<span class="contact__card-icon" aria-hidden="true">&#9993;</span>' +
+        "<h3>Email</h3>" +
+        '<p><a href="mailto:' +
+        escapeHtml(contact.email) +
+        '">' +
+        escapeHtml(contact.email) +
+        "</a></p>" +
+        "</div>"
+      : "") +
+    (contact.phone
+      ? '<div class="contact__card contact__card--phone">' +
+        '<span class="contact__card-icon" aria-hidden="true">&#128222;</span>' +
+        "<h3>Phone</h3>" +
+        '<p><a href="' +
+        escapeHtml(phoneHref) +
+        '">' +
+        escapeHtml(contact.phone) +
+        "</a></p>" +
+        "</div>"
+      : "") +
+    "</div>" +
+    '<div class="contact__licenses" id="licenses">' +
+    '<header class="contact__licenses-header">' +
+    "<h3>" +
+    escapeHtml(contact.licensesHeading || "Licenses & Certifications") +
+    "</h3>" +
+    (contact.licensesIntro
+      ? "<p>" + escapeHtml(contact.licensesIntro) + "</p>"
+      : "") +
+    (licenses.length
+      ? '<p class="contact__proof"><span class="contact__proof-badge" aria-hidden="true">&#10003;</span>' +
+        "<span><strong>" +
+        escapeHtml(String(licenses.length)) +
+        " official documents</strong> on file</span></p>"
+      : "") +
+    "</header>" +
+    '<ul class="licenses__grid" id="licenses-grid">' +
+    licensesHtml +
+    "</ul>" +
+    "</div>" +
+    "</div>";
+}
+
 function initSectionBreadcrumbs() {
   const list = document.getElementById("section-breadcrumbs-list");
   const scrollWrap = document.querySelector(".section-breadcrumbs__scroll");
@@ -592,10 +856,12 @@ function initSectionBreadcrumbs() {
 document.addEventListener("DOMContentLoaded", function () {
   renderProjects();
   renderAbout();
+  renderJourney();
   initSectionBreadcrumbs();
   renderAwards();
   renderTestimonials();
   renderFaqs();
+  renderContact();
 
   /* ---------- Mobile navigation menu ---------- */
   const menuBtn = document.querySelector(".nav__menu-btn");
