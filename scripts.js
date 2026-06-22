@@ -421,14 +421,31 @@ function renderAbout() {
     values: "✦",
   };
 
-  const toBody = function (body) {
-    if (!body) return "";
-    const parts = Array.isArray(body) ? body : [body];
-    return parts
-      .map(function (p) {
-        return "<p>" + escapeHtml(p) + "</p>";
-      })
-      .join("");
+  const toBody = function (body, mobileBody) {
+    if (!body && !mobileBody) return "";
+
+    const renderParagraph = function (text) {
+      if (!text) return "";
+      const parts = Array.isArray(text) ? text : [text];
+      return parts
+        .map(function (p) {
+          return "<p>" + escapeHtml(p) + "</p>";
+        })
+        .join("");
+    };
+
+    if (mobileBody) {
+      return (
+        '<div class="about-pillar__body about-pillar__body--desktop">' +
+        renderParagraph(body) +
+        "</div>" +
+        '<div class="about-pillar__body about-pillar__body--mobile">' +
+        renderParagraph(mobileBody) +
+        "</div>"
+      );
+    }
+
+    return renderParagraph(body);
   };
 
   const pillarsHtml = pillars
@@ -446,13 +463,30 @@ function renderAbout() {
 
       const pointsHtml =
         Array.isArray(pillar.points) && pillar.points.length
-          ? '<ul class="about-pillar__points">' +
-            pillar.points
-              .map(function (point) {
-                return "<li>" + escapeHtml(point) + "</li>";
-              })
-              .join("") +
-            "</ul>"
+          ? (function () {
+              const renderList = function (items, modifier) {
+                return (
+                  '<ul class="about-pillar__points' +
+                  (modifier ? " about-pillar__points--" + modifier : "") +
+                  '">' +
+                  items
+                    .map(function (point) {
+                      return "<li>" + escapeHtml(point) + "</li>";
+                    })
+                    .join("") +
+                  "</ul>"
+                );
+              };
+
+              if (Array.isArray(pillar.mobilePoints) && pillar.mobilePoints.length) {
+                return (
+                  renderList(pillar.points, "desktop") +
+                  renderList(pillar.mobilePoints, "mobile")
+                );
+              }
+
+              return renderList(pillar.points);
+            })()
           : "";
 
       return (
@@ -478,7 +512,7 @@ function renderAbout() {
         '">' +
         escapeHtml(pillar.label || "") +
         "</h3>" +
-        toBody(pillar.body) +
+        toBody(pillar.body, pillar.mobileBody) +
         pointsHtml +
         "</div>" +
         '<span class="about-pillar__index" aria-hidden="true">' +

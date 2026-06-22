@@ -384,7 +384,9 @@ window.JOURNEY = {
 //   label       (required)  "Mission", "Vision", or "Values"
 //   tagline     optional    Short line above the label, e.g. "What we do daily"
 //   body        (required)  Main text (string or array of strings)
+//   mobileBody  optional    Shorter text shown on mobile (fewer lines)
 //   points      optional    Bullet list — use for Values
+//   mobilePoints optional   Shorter bullet list for mobile
 //   accent      optional    "green", "blue", or "yellow" (default: "green")
 //   featured    optional    true — larger spotlight card (best for Mission)
 // --------------------------------------------------------------------------
@@ -400,6 +402,8 @@ window.ABOUT = {
             label: "Mission",
             tagline: "What we do every day",
             body: "We commit to creating lasting social impact by addressing critical societal issues through a network of dedicated professionals and volunteers.",
+            mobileBody:
+                "We create lasting social impact with professionals and volunteers tackling society's most critical needs.",
             accent: "green",
             featured: true,
         },
@@ -408,6 +412,8 @@ window.ABOUT = {
             label: "Vision",
             tagline: "Where we're heading",
             body: "A world where every person has access to opportunity, care, and hope — and no one is left behind.",
+            mobileBody:
+                "A world where everyone has opportunity, care, and hope — leaving no one behind.",
             accent: "blue",
         },
         {
@@ -415,10 +421,16 @@ window.ABOUT = {
             label: "Values",
             tagline: "How we show up",
             body: "The principles that guide every programme, partnership, and rupee spent.",
+            mobileBody: "The principles behind every programme, partnership, and rupee.",
             points: [
                 "Transparency — open reporting on every rupee",
                 "Dignity — respect for every life we serve",
                 "Collaboration — communities lead, we support",
+            ],
+            mobilePoints: [
+                "Transparency in every rupee",
+                "Dignity for every life we serve",
+                "Communities lead; we support",
             ],
             accent: "yellow",
         },

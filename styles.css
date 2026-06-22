@@ -966,6 +966,14 @@ address {
     margin-bottom: 0;
 }
 
+.about-pillar__body--mobile {
+    display: none;
+}
+
+.about-pillar__points--mobile {
+    display: none;
+}
+
 .about-pillar__points {
     margin: var(--space-sm) 0 0;
     padding: 0;
@@ -3459,6 +3467,60 @@ address {
 
     .about__pillars {
         grid-template-columns: 1fr;
+    }
+
+    .about-pillar {
+        gap: var(--space-sm);
+        padding: var(--space-md);
+    }
+
+    .about-pillar__icon {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 1rem;
+    }
+
+    .about-pillar__tagline {
+        font-size: 0.6875rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .about-pillar__content h3 {
+        font-size: 1.0625rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .about-pillar__content p {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+    }
+
+    .about-pillar__body--desktop,
+    .about-pillar__points--desktop {
+        display: none;
+    }
+
+    .about-pillar__body--mobile,
+    .about-pillar__points--mobile {
+        display: block;
+    }
+
+    .about-pillar__points {
+        margin-top: 0.45rem;
+    }
+
+    .about-pillar__points li {
+        font-size: 0.8125rem;
+        line-height: 1.4;
+        margin-bottom: 0.2rem;
+    }
+
+    .about-pillar--featured {
+        padding: var(--space-md);
+    }
+
+    .about-pillar--featured h3 {
+        font-size: 1.125rem;
     }
 
     .projects__grid {
